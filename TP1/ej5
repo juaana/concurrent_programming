@@ -1,0 +1,142 @@
+programa Cinco
+procesos
+  proceso RecojePrimerasFlores (E i:numero)
+  comenzar
+    si (PosAv<=i)
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+  fin
+  proceso RecojeUltimasFlores (E i:numero)
+  comenzar
+    si (PosAv >= i)
+      mientras HayFlorEnLaEsquina
+        tomarFlor
+  fin
+  proceso MoverYDepositarFlores(E avenida: numero; E calle: numero)
+  comenzar
+    Pos(avenida,calle)
+    mientras HayFlorEnLaBolsa
+      depositarFlor
+  fin
+  proceso RecojePrimerosPapeles (E i:numero)
+  comenzar
+    si (PosCa<=i)
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+  fin
+  proceso RecojeUltimosPapeles (E i:numero)
+  comenzar
+    si (PosCa>=i)
+      mientras HayPapelEnLaEsquina
+        tomarPapel
+  fin
+  proceso MoverYDepositarPapeles(E avenida: numero; E calle: numero)
+  comenzar
+    Pos(avenida,calle)
+    mientras HayPapelEnLaBolsa
+      depositarPapel
+  fin
+areas 
+  ciudad: AreaC(1,1,100,100)
+robots
+  robot tipo1
+  variables
+    i, avenida, calle: numero
+  comenzar
+    i:= 15
+    avenida:= 100
+    calle:= 75
+    derecha
+    repetir 99 
+      RecojePrimerasFlores(i)
+      mover
+    RecojePrimerasFlores(i)
+    MoverYDepositarFlores(avenida,calle)
+    Pos(1,80)
+    calle:=80
+    repetir 99 
+      RecojePrimerasFlores(i)
+      mover
+    RecojePrimerasFlores(i)
+    MoverYDepositarFlores(avenida,calle)
+  fin
+  robot tipo3
+  variables
+    i, avenida, calle: numero
+  comenzar
+    i:= 70
+    avenida:=100
+    calle:= 10
+    derecha
+    repetir 99 
+      RecojeUltimasFlores(i)
+      mover
+    RecojeUltimasFlores(i)
+    MoverYDepositarFlores(avenida,calle)
+    Pos(1,15)
+    calle:=15
+    repetir 99 
+      RecojeUltimasFlores(i)
+      mover
+    RecojeUltimasFlores(i)
+    MoverYDepositarFlores(avenida,calle)
+  fin
+  robot tipo4
+  variables
+    i, avenida, calle: numero
+  comenzar
+    i:= 10
+    avenida:=10
+    calle:= 1
+    repetir 99 
+      RecojePrimerosPapeles(i)
+      mover
+    RecojePrimerosPapeles(i)
+    MoverYDepositarPapeles(avenida,calle)
+    Pos(15,1)
+    avenida:= 15
+    repetir 99 
+      RecojePrimerosPapeles(i)
+      mover
+    RecojePrimerosPapeles(i)
+    MoverYDepositarPapeles(avenida,calle)
+  fin
+
+  robot tipo2
+  variables
+    i, avenida, calle: numero
+  comenzar
+    i:= 80
+    avenida:= 75
+    calle:= 1
+    repetir 99 
+      RecojeUltimosPapeles(i)
+      mover
+    RecojeUltimosPapeles(i)
+    MoverYDepositarPapeles(avenida,calle)
+    Pos(80,1)
+    avenida:= 80
+    repetir 99 
+      RecojeUltimosPapeles(i)
+      mover
+    RecojeUltimosPapeles(i)
+    MoverYDepositarPapeles(avenida,calle)
+  fin
+variables 
+  robot1: tipo1
+  robot2: tipo2
+  robot3: tipo3
+  robot4: tipo4
+comenzar
+  AsignarArea(robot1, ciudad)
+  AsignarArea(robot2, ciudad)
+  AsignarArea(robot3, ciudad)
+  AsignarArea(robot4, ciudad)
+  Iniciar(robot1, 1, 75)
+  Iniciar(robot2, 75, 1)
+  Iniciar(robot3, 1, 10)
+  Iniciar(robot4, 10, 1)
+fin
+
+
+

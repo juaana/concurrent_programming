@@ -1,0 +1,55 @@
+programa Ejercicio2
+procesos
+  proceso recorrerJuntandoPapeles
+  comenzar
+    repetir 24
+      si (HayPapelEnLaEsquina) 
+        mientras (HayPapelEnLaEsquina)
+          tomarPapel
+        mover
+      sino 
+        mover
+    si (HayPapelEnLaEsquina)
+      mientras (HayPapelEnLaEsquina)
+        tomarPapel
+      
+  fin 
+  proceso recorrerJuntandoFlores
+  comenzar
+    repetir 24
+      si (HayFlorEnLaEsquina) 
+        mientras (HayFlorEnLaEsquina)
+          tomarFlor
+        mover
+      sino 
+        mover
+    si (HayFlorEnLaEsquina)
+      mientras (HayFlorEnLaEsquina)
+        tomarFlor
+  fin 
+areas
+  ciudad:AreaC(1,1,100,100)
+robots
+  robot tipo1
+  comenzar
+    derecha
+    recorrerJuntandoPapeles
+  fin
+  robot tipo2
+  comenzar
+    derecha
+    recorrerJuntandoFlores
+  fin
+variables
+  robot1, robot3: tipo1
+  robot2, robot4: tipo2
+comenzar
+  AsignarArea(robot1,ciudad)
+  AsignarArea(robot2,ciudad)
+  AsignarArea(robot3,ciudad)
+  AsignarArea(robot4,ciudad)
+  Iniciar(robot1,1,1)
+  Iniciar(robot2,26,1)
+  Iniciar(robot3,51,1)
+  Iniciar(robot4,76,1)
+fin
