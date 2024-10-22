@@ -1,0 +1,103 @@
+programa Ejercicio4
+procesos
+  proceso tomarFlores
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+  proceso tomarPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin  
+  proceso limpiarImpares
+  comenzar
+    repetir 4
+      repetir 99
+        tomarFlores
+        mover
+      tomarFlores
+      Pos(PosAv+1, 1)
+    repetir 99
+      tomarFlores
+      mover
+    tomarFlores    
+  fin
+  proceso limpiarPares
+  comenzar 
+    repetir 4 
+      repetir 99 
+        tomarPapeles
+        mover
+      tomarPapeles
+      Pos(PosAv+1, 1)
+    repetir 99
+      tomarPapeles
+      mover 
+    tomarPapeles    
+  fin
+areas
+  Area1:AreaP(1,1,5,100)
+  Area2:AreaP(6,1,10,100)
+  Area3:AreaP(11,1,15,100)
+  Area4:AreaP(16,1,20,100)
+  Area5:AreaP(21,1,25,100)
+  Area6:AreaP(26,1,30,100)
+  Area7:AreaP(31,1,35,100)
+  Area8:AreaP(36,1,40,100)
+  Area9:AreaP(41,1,45,100)
+  Area10:AreaP(46,1,50,100)
+  Area11:AreaP(51,1,55,100)
+  Area12:AreaP(56,1,60,100)
+  Area13:AreaP(61,1,65,100)
+  Area14:AreaP(66,1,70,100)
+  Area15:AreaP(71,1,75,100)
+  Area16:AreaP(76,1,80,100)
+  Area17:AreaP(81,1,85,100)
+  Area18:AreaP(86,1,90,100)
+  Area19:AreaP(91,1,95,100)
+  Area20:AreaP(96,1,100,100)
+robots
+  robot tipo1
+  comenzar
+    repetir 9
+      limpiarImpares
+      Pos(PosAv+6, 1)
+    limpiarImpares
+  fin
+  robot tipo2
+  comenzar
+    repetir 9
+      limpiarPares
+      Pos(PosAv+6,1)
+    limpiarPares
+  fin
+variables
+  robot1 :tipo1
+  robot2: tipo2
+comenzar
+  AsignarArea(robot1,Area1)
+  AsignarArea(robot1,Area3)
+  AsignarArea(robot1,Area5)
+  AsignarArea(robot1,Area7)
+  AsignarArea(robot1,Area9)
+  AsignarArea(robot1,Area11)
+  AsignarArea(robot1,Area13)
+  AsignarArea(robot1,Area15)
+  AsignarArea(robot1,Area17)
+  AsignarArea(robot1,Area19)
+  
+  AsignarArea(robot2,Area2)
+  AsignarArea(robot2,Area4)
+  AsignarArea(robot2,Area6)
+  AsignarArea(robot2,Area8)
+  AsignarArea(robot2,Area10)
+  AsignarArea(robot2,Area12)
+  AsignarArea(robot2,Area14)
+  AsignarArea(robot2,Area16)
+  AsignarArea(robot2,Area18)
+  AsignarArea(robot2,Area20)
+  
+  Iniciar(robot1,1,1)
+  Iniciar(robot2,6,1)
+fin

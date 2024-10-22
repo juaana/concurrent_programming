@@ -1,0 +1,56 @@
+{Realice un programa en el que 4 robots limpien de papeles el perímetro de un cuadrado de lado 20 en sentido horario, como se muestra en la figura:}
+programa Ej2
+procesos
+  proceso tomarPapeles
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso recorrer
+  comenzar
+    repetir 20
+      tomarPapeles
+      mover
+  fin 
+  proceso girar(E cantidad: numero)
+  comenzar
+    repetir cantidad
+      derecha
+  fin
+areas
+  ciudad: AreaPC (10,10,30,30)
+robots
+  robot tipo1
+  comenzar
+    recorrer
+  fin 
+  robot tipo2
+  comenzar
+    girar(1)
+    recorrer
+  fin 
+  robot tipo3
+  comenzar
+    girar(2)
+    recorrer
+  fin
+  robot tipo4
+  comenzar
+    girar(3)
+    recorrer
+  fin 
+variables
+  robot1: tipo1
+  robot2: tipo2
+  robot3: tipo3
+  robot4: tipo4
+comenzar 
+  AsignarArea(robot1, ciudad)
+  AsignarArea(robot2, ciudad)
+  AsignarArea(robot3, ciudad)
+  AsignarArea(robot4, ciudad)
+  Iniciar(robot1,10, 10) 
+  Iniciar(robot2,10, 30)
+  Iniciar(robot3, 30, 30)
+  Iniciar(robot4, 30, 10)
+fin
