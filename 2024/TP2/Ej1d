@@ -1,4 +1,4 @@
-programa Ej1
+programa Ej1d
 procesos
   proceso tomarFlores(ES flores: numero)
   comenzar 
