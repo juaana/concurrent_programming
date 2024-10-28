@@ -1028,7 +1028,7 @@ Ejemplo de uso
  <br>
 
 
-## Areas
+## Áreas
 
 Las áreas son regiones del mapa donde las avenidas y calles que componen cada una de dichas áreas solo pueden estar incluidas en una única declaración de estas.
 
