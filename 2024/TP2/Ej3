@@ -1,0 +1,83 @@
+programa ejemplo
+procesos
+  proceso tomarPapeles(ES papeles: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      papeles:= papeles +1
+  fin
+  proceso tomarFlores(ES flores: numero)
+  comenzar 
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores +1
+  fin
+  proceso recorrerJuntandoPapeles(ES papeles: numero)
+  comenzar
+    repetir 9
+      tomarPapeles(papeles)
+      mover
+    tomarPapeles(papeles)
+  fin
+  proceso recorrerJuntandoFlores(ES flores: numero)
+  comenzar 
+    repetir 9
+      tomarFlores(flores)
+      mover
+    tomarFlores(flores)
+  fin
+areas
+  A1: AreaP (1,1,10,1)
+  A2: AreaP (11,1,20,1)
+  B1: AreaP (1,5,10,5)
+  B2: AreaP (11,5,20,5)
+robots
+  robot rA1
+  variables
+    papeles: numero 
+  comenzar
+    derecha
+    recorrerJuntandoPapeles(papeles)
+    EnviarMensaje(papeles, robotA2)
+  fin
+  robot rA2
+  variables 
+    papeles: numero  
+  comenzar 
+    RecibirMensaje(papeles, robotA1)
+    derecha
+    recorrerJuntandoPapeles(papeles)
+    Informar(papeles)
+  fin 
+  robot rB1
+  variables
+    flores: numero 
+  comenzar 
+    derecha 
+    recorrerJuntandoFlores(flores) 
+    EnviarMensaje(flores, robotB2)
+  fin 
+  robot rB2 
+  variables  
+    flores: numero  
+  comenzar  
+    RecibirMensaje(flores, robotB1)
+    derecha
+    recorrerJuntandoFlores(flores)
+    Informar(flores)
+  fin 
+variables
+  robotA1: rA1
+  robotA2: rA2
+  robotB1: rB1
+  robotB2: rB2
+comenzar
+  AsignarArea(robotA1, A1)
+  AsignarArea(robotA2, A2)
+  AsignarArea(robotB1, B1)
+  AsignarArea(robotB2, B2)
+  Iniciar(robotA1,1,1)
+  Iniciar(robotA2, 11,1)
+  Iniciar(robotB1, 1,5)
+  Iniciar(robotB2, 11,5)
+fin

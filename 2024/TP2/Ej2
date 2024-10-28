@@ -1,0 +1,106 @@
+{Realice un programa en el que 3 robots realizan una escalera de 4 escalones cada uno.
+Todos los escalones tienen un ancho fijo de 1, y un alto aleatorio entre 1 y 5. Al finalizar
+el recorrido, cada robot deberá enviar al robot jefe la cantidad de escalones que tenían
+más flores que papeles. Una vez que los tres robots finalizaron, el robot jefe deberá
+informar la suma de las cantidades enviadas por los 3 robots.
+○ El robot jefe inicia en la esquina (1,1)
+○ El robot 1 inicia en la esquina (2,1)
+○ El robot 2 inicia en la esquina (7,1)
+○ El robot 3 inicia en la esquina (12,1)}
+programa Ej2
+procesos
+  proceso cantidadFlores(ES cantidadFlores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      cantidadFlores:= cantidadFlores +1
+    mientras HayFlorEnLaBolsa
+      depositarFlor
+  fin
+  proceso cantidadPapeles(ES cantidadPapeles: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      cantidadPapeles:= cantidadPapeles+1 
+    mientras HayPapelEnLaBolsa
+      depositarPapel
+  fin
+  proceso girar(E cantidad: numero)
+  comenzar
+    repetir cantidad
+      derecha
+  fin
+  proceso escalon(ES cantidad: numero)
+  variables
+    random, cantidadPapeles, cantidadFlores: numero
+  comenzar
+    Random(random,1,5)
+    cantidadPapeles:= 0
+    cantidadFlores:= 0
+    repetir random
+      cantidadPapeles(cantidadPapeles)
+      cantidadFlores(cantidadFlores)
+      mover
+    derecha
+    cantidadPapeles(cantidadPapeles)
+    cantidadFlores(cantidadFlores)
+    mover
+    girar(3)
+    si (cantidadFlores > cantidadPapeles)
+      cantidad:= cantidad +1 
+  fin
+  proceso escalera(ES cantidad: numero)
+  comenzar 
+    repetir 4 
+      escalon(cantidad)
+  fin 
+areas
+  Area1: AreaP (2,1,6,100)
+  Area2: AreaP (7,1,11,100)
+  Area3: AreaP (12,1,17,100)
+  AreaJ: AreaP (1,1,1,1) 
+robots
+  robot Escalador
+  variables
+    quien, cantidad: numero
+  comenzar
+    RecibirMensaje(quien, jefe)
+    escalera(cantidad)
+    EnviarMensaje(quien, jefe)
+    EnviarMensaje(cantidad, jefe)
+  fin
+  robot Jefe
+  variables
+    quien, cantidadTotal, cantidad: numero
+  comenzar
+    cantidadTotal:=0
+    EnviarMensaje(1, robot1)
+    EnviarMensaje(2, robot2)
+    EnviarMensaje(3, robot3)
+    repetir 3
+      RecibirMensaje(quien, *)
+      si (quien = 1) 
+        RecibirMensaje(cantidad, robot1)
+        cantidadTotal:= cantidadTotal + cantidad
+      sino
+        si (quien = 2) 
+          RecibirMensaje(cantidad, robot2)
+          cantidadTotal:= cantidadTotal + cantidad
+        sino
+          RecibirMensaje(cantidad, robot3)
+          cantidadTotal:= cantidadTotal + cantidad
+    Informar(cantidadTotal) 
+  fin
+variables
+  robot1, robot2, robot3: Escalador
+  jefe: Jefe
+comenzar
+  AsignarArea(robot1, Area1)
+  AsignarArea(robot2, Area2)
+  AsignarArea(robot3, Area3)
+  AsignarArea(jefe, AreaJ)
+  Iniciar(robot1, 2,1)
+  Iniciar(robot2, 7,1)
+  Iniciar(robot3, 12,1)
+  Iniciar(jefe,1,1)
+fin

@@ -1,0 +1,97 @@
+programa Ej1
+procesos
+  proceso tomarFlores(ES flores: numero)
+  comenzar 
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor
+      flores:= flores +1
+  fin
+  proceso ganador(ES flores: numero; ES floresMax: numero; ES robotMax: numero; E quien: numero)
+  comenzar
+    si (flores > floresMax)
+      floresMax:= flores
+      robotMax:= quien
+  fin
+areas
+  Area1: AreaP(1,1,1,10)  
+  Area2: AreaP(2,11,2,20)
+  Area3: AreaP(3,21,3,30) 
+  Area4: AreaP(4,31,4,40)  
+  Area5: AreaP(5,41,5,50)  
+  Area6: AreaP(6,51,6,60)     
+  Area7: AreaP(2,1,2,1)  
+robots
+  robot Juntador
+  variables
+    flores, quienSoy: numero
+  comenzar
+    RecibirMensaje(quienSoy, jefe)
+    repetir 9
+      tomarFlores(flores)
+      mover
+    tomarFlores(flores) 
+    EnviarMensaje(quienSoy, jefe)
+    EnviarMensaje(flores, jefe)
+  fin
+  robot Jefe
+  variables
+    quien: numero
+    flores, floresMax, robotMax: numero
+  comenzar
+    quien:= 0
+    flores:= 0
+    floresMax:= 0
+    robotMax:= 0
+    EnviarMensaje( 1, robot1)
+    EnviarMensaje(2, robot2)
+    EnviarMensaje(3, robot3)
+    EnviarMensaje(4, robot4)
+    EnviarMensaje(5, robot5)
+    EnviarMensaje(6, robot6)
+    repetir 6 
+      RecibirMensaje(quien, *)
+      si quien = 1
+        RecibirMensaje(flores,robot1)
+        ganador(flores, floresMax,robotMax,quien)
+      sino 
+        si quien = 2
+          RecibirMensaje(flores,robot2)
+          ganador(flores, floresMax,robotMax,quien)
+        sino 
+          si quien = 3
+            RecibirMensaje(flores,robot3)
+            ganador(flores, floresMax,robotMax,quien)
+          sino
+            si quien = 4
+              RecibirMensaje(flores,robot4)
+              ganador(flores, floresMax,robotMax,quien)
+            sino 
+              si quien = 5
+                RecibirMensaje(flores,robot5)
+                ganador(flores, floresMax,robotMax,quien)
+              sino 
+                si quien = 6
+                  RecibirMensaje(flores,robot6)
+                  ganador(flores, floresMax,robotMax,quien)
+    Informar(robotMax)
+    Informar(floresMax)
+  fin
+variables
+  robot1, robot2, robot3, robot4, robot5, robot6: Juntador
+  jefe: Jefe
+comenzar
+  AsignarArea(jefe, Area7)
+  AsignarArea(robot1, Area1)
+  AsignarArea(robot2, Area2)
+  AsignarArea(robot3, Area3)
+  AsignarArea(robot4, Area4)
+  AsignarArea(robot5, Area5)
+  AsignarArea(robot6, Area6)
+  Iniciar(jefe,2,1)
+  Iniciar(robot1,1,1)
+  Iniciar(robot2,2,11) 
+  Iniciar(robot3,3,21)
+  Iniciar(robot4,4,31) 
+  Iniciar(robot5,5,41)
+  Iniciar(robot6,6,51) 
+fin
