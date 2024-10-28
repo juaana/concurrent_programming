@@ -1,4 +1,4 @@
-programa ejemplo
+programa Ej4
 procesos
   proceso juntarFlores(ES flores: numero)
   comenzar
