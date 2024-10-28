@@ -1,4 +1,4 @@
-## **Indice**
+## **ÍNDICE**
 - [Estructura del programa](#estructura-del-programa)
 - [Tipos de dato](#tipos-de-dato)
 - [Operadores](#operadores)
@@ -72,7 +72,7 @@ Copiar código
 > [!TIP]
 > **IMPORTANTE**: Todas las secciones se detallan en el apartado de [Secciones](#secciones).
 
-[indice](#indice)
+[:house:](#:house:)
 
 
 
@@ -94,7 +94,7 @@ Representa la veracidad de una afirmación. Tiene dos valores:
 
 También se usa para indicar existencia, permisos o habilitación.
 
-[indice](#indice)
+[:house:](#:house:)
 
 
 
@@ -356,7 +356,7 @@ Por ejemplo
 
 [Operadores ⬆](#operadores)
 
-[indice](#indice)
+[:house:](#:house:)
 
 
 
@@ -462,7 +462,7 @@ Para la escritura de un valor en una variable se debe poner la variable a escrib
 
 [Variables dato ⬆](#variables-dato)
 
-[indice](#indice)
+[:house:](#:house:)
 
 
 
@@ -842,7 +842,7 @@ Ejemplo de uso
 
 [Random⬆](#random)
 
-[indice](#indice)
+[:house:](#:house:)
 
 
 
@@ -1220,7 +1220,7 @@ Ejemplo de uso:
 
 [Secciones ⬆](#secciones)
 
-[indice](#indice)
+[:house:](#:house:)
 
 
 
