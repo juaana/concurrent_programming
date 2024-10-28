@@ -72,7 +72,7 @@ Copiar código
 > [!TIP]
 > **IMPORTANTE**: Todas las secciones se detallan en el apartado de [Secciones](#secciones).
 
-[:house:](#:house:)
+[:house:](#indice)
 
 
 
@@ -94,7 +94,7 @@ Representa la veracidad de una afirmación. Tiene dos valores:
 
 También se usa para indicar existencia, permisos o habilitación.
 
-[:house:](#:house:)
+[:house:](#indice)
 
 
 
@@ -356,7 +356,7 @@ Por ejemplo
 
 [Operadores ⬆](#operadores)
 
-[:house:](#:house:)
+[:house:](#indice)
 
 
 
@@ -462,7 +462,7 @@ Para la escritura de un valor en una variable se debe poner la variable a escrib
 
 [Variables dato ⬆](#variables-dato)
 
-[:house:](#:house:)
+[:house:](#indice)
 
 
 
@@ -842,7 +842,7 @@ Ejemplo de uso
 
 [Random⬆](#random)
 
-[:house:](#:house:)
+[:house:](#indice)
 
 
 
@@ -1220,7 +1220,7 @@ Ejemplo de uso:
 
 [Secciones ⬆](#secciones)
 
-[:house:](#:house:)
+[:house:](#indice)
 
 
 
