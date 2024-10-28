@@ -1,4 +1,4 @@
-## **ÍNDICE**
+## **Indice**
 - [Estructura del programa](#estructura-del-programa)
 - [Tipos de dato](#tipos-de-dato)
 - [Operadores](#operadores)
@@ -25,7 +25,6 @@
     - [variables](#variables)
     - [comenzar y fin](#comenzar-y-fin)
 
-#indice
 <br> <br> <br>
 
 
