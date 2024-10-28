@@ -23,18 +23,19 @@ robots
   robot Juntador
   variables
     ok, soyGanador: boolean
-    cantidad, avenida, ave, calle, cal, flores: numero
+    cantidad, avenida, ave, cal, flores: numero
   comenzar
-    RecibirMensaje(ok, jefe) 
-    mientras (ok = F)
-      avenida:= PosAv
-      calle:= PosCa
+    cantidad:= 0
+    soyGanador:= F
+    avenida:= PosAv 
+    RecibirMensaje(ok, jefe)
+    mientras (ok = F) 
       Random(ave, 25, 75)
       Random(cal,25, 75)
       Pos(ave , cal )
       juntarFlores(cantidad)
       juntarPapeles(cantidad)
-      Pos(avenida, calle)
+      Pos(avenida, 1)
       EnviarMensaje(cantidad,jefe)
       RecibirMensaje(ok, jefe)
     RecibirMensaje(soyGanador, jefe)
