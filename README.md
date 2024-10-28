@@ -2,30 +2,30 @@
 - [Estructura del programa](#estructura-del-programa)
 - [Tipos de dato](#tipos-de-dato)
 - [Operadores](#operadores)
-    - [Logicos](#logicos)
-    - [Aritmeticos](#aritmeticos)
-    - [Asignacion](#asignacion)
+    - [Lógicos](#lógicos)
+    - [Aritméticos](#aritméticos)
+    - [Asignación](#asignación)
     - [Encadenamiento](#encadenamiento)
-    - [Parentesis](#parentesis)
+    - [Paréntesis](#paréntesis)
 - [Variables dato](#variables-dato)
-    - [Declaracion](#declaracion)
+    - [Declaración](#declaración)
     - [Operaciones](#operaciones)
 - [Instrucciones](#instrucciones)
     - [Control](#control)
     - [Estado](#estado)
-    - [Accion](#accion)
+    - [Acción](#acción)
     - [Desplazamiento](#desplazamiento)
-    - [Comunicacion](#comunicacion)
+    - [Comunicación](#comunicación)
     - [Random](#random)
 - [Secciones](#secciones)
-    - [programa](#programa)
-    - [procesos](#procesos)
-    - [areas](#areas)
-    - [robots](#robots)
-    - [variables](#variables)
-    - [comenzar y fin](#comenzar-y-fin)
+    - [Programa](#programa)
+    - [Procesos](#procesos)
+    - [Áreas](#áreas)
+    - [Robots](#robots)
+    - [Variables](#variables)
+    - [Comenzar y fin](#comenzar-y-fin)
 
-<br> <br> <br>
+ <br> 
 
 
 
@@ -75,7 +75,7 @@ Copiar código
 
 
 
-<br> <br> <br>
+<br>
 
 
 
@@ -97,7 +97,7 @@ También se usa para indicar existencia, permisos o habilitación.
 
 
 
-<br> <br> <br>
+<br> 
 
 
 ## Operadores
@@ -245,7 +245,7 @@ El **mayor o igual** resulta en verdad si el primer valor es mayor o igual que e
 [Operadores ⬆](#operadores)
 
 
-<br> <br>
+<br> 
 
 
 ## Aritméticos
@@ -296,7 +296,7 @@ El `:=` se emplea para asignar un valor a una variable, respetando su tipo de da
 [Operadores ⬆](#operadores)
 
 
-<br> <br>
+<br> 
 
 
 ## Encadenamiento
@@ -328,8 +328,7 @@ El resultado de lo anterior seria falso si no fuera problema el echo de que no q
 [Operadores ⬆](#operadores)
 
 
-<br> <br>
-
+<br> 
 
 ## Paréntesis
 
@@ -359,7 +358,7 @@ Por ejemplo
 
 
 
-<br> <br> <br>
+  <br>
 
 
 
@@ -368,7 +367,7 @@ Por ejemplo
 Una variable es un espacio de memoria donde se guarda algun valor que representa cierto dato, este espacio se representa para el programador con el nombre que se le da a la variable y a traves de la utilización del nombre se puede acceder al valor para leerlo o modificarlo
 
 
-<br> <br>
+ <br>
 
 
 ## Declaración
@@ -401,7 +400,7 @@ Si son del mismo tipo pueden declararse juntas separadas por una ","
 [Variables dato ⬆](#variables-dato)
 
 
-<br> <br>
+ <br>
 
 
 ## Operaciones
@@ -465,7 +464,7 @@ Para la escritura de un valor en una variable se debe poner la variable a escrib
 
 
 
-<br> <br> <br>
+  <br>
 
 
 
@@ -482,7 +481,7 @@ Estas se dividen en
 - [Generacion](#generacion)
 
 
-<br> <br>
+ <br>
 
 
 ## Control
@@ -608,7 +607,7 @@ Un ejemplo es calcular la potencia de cierto numero
 [Instrucciones ⬆](#instrucciones)
 
 
-<br> <br>
+<br> 
 
 
 ## Estado
@@ -635,7 +634,7 @@ Respecto del inventario, existen las siguientes instrucciones:
 [Instrucciones ⬆](#instrucciones)
 
 
-<br> <br>
+ <br>
 
 
 ## Acción
@@ -657,7 +656,7 @@ Existen las siguientes instrucciones:
 [Instrucciones ⬆](#instrucciones)
 
 
-<br> <br>
+ <br>
 
 
 ## Desplazamiento
@@ -722,7 +721,7 @@ Ejemplos
 [Instrucciones ⬆](#instrucciones)
 
 
-<br> <br>
+ <br>
 
 
 ## Comunicación
@@ -816,10 +815,10 @@ Ejemplo de uso
 [Instrucciones ⬆](#instrucciones)
 
 
-<br> <br>
+ <br>
 
 
-# Random
+## Random
 
 Sobre generación, existe una única instrucción para generar valores de tipo número aleatorios dentro de un rango indicado.
 
@@ -845,7 +844,7 @@ Ejemplo de uso
 
 
 
-<br> <br> <br>
+  <br>
 
 
 
@@ -860,7 +859,7 @@ Un programa en este lenguage se constituye de secciones que se encargan cada una
 - [comenzar y fin](#comenzar-y-fin)
 
 
-<br> <br>
+ <br>
 
 
 ### Programa
@@ -885,7 +884,7 @@ Ejemplo de uso
 [Secciones ⬆](#secciones)
 
 
-<br> <br>
+ <br>
 
 
 ### Procesos
@@ -1026,7 +1025,7 @@ Ejemplo de uso
 [Secciones ⬆](#secciones)
 
 
-<br> <br>
+ <br>
 
 
 ## Areas
@@ -1083,7 +1082,7 @@ Ejemplo de uso
 [Secciones ⬆](#secciones)
 
 
-<br> <br>
+ <br>
 
 
 ## Robots
@@ -1156,7 +1155,7 @@ Ejemplo de uso
 [Secciones ⬆](#secciones)
 
 
-<br> <br>
+ <br>
 
 
 ## Variables
@@ -1185,7 +1184,7 @@ Ejemplo de uso
 [Secciones ⬆](#secciones)
 
 
-<br> <br>
+ <br>
 
 
 ## Comenzar y fin
@@ -1223,7 +1222,7 @@ Ejemplo de uso:
 
 
 
-<br> <br> <br>
+  <br>
 
 
 
