@@ -16,7 +16,7 @@
     - [Accion](#accion)
     - [Desplazamiento](#desplazamiento)
     - [Comunicacion](#comunicacion)
-    - [Generacion](#generacion)
+    - [Random](#random)
 - [Secciones](#secciones)
     - [programa](#programa)
     - [procesos](#procesos)
@@ -24,8 +24,6 @@
     - [robots](#robots)
     - [variables](#variables)
     - [comenzar y fin](#comenzar-y-fin)
-- [Glosario](#glosario)
-
 
 
 <br> <br> <br>
@@ -368,21 +366,21 @@ Por ejemplo
 
 ## **Variables dato**
 
-Una variable es un espacio de memoria donde se guarda algun valor que representa cierto dato, este espacio se representa para el programador con el nombre que se le da a la variable y a travez de la utilizacion del nombre se puede acceder al valor para leerlo o cambiarlo
+Una variable es un espacio de memoria donde se guarda algun valor que representa cierto dato, este espacio se representa para el programador con el nombre que se le da a la variable y a traves de la utilización del nombre se puede acceder al valor para leerlo o modificarlo
 
 
 <br> <br>
 
 
-## Declaracion
+## Declaración
 
-Para declarar variables se necesita crear el segmento de varibales escribiendo la palabra clave **variables**, este segmento no puede ser creado en cualquier lugar, revisar el apartado de [secciones](#secciones), ahi se detalla si en una seccion pueden existir variables dato
+Para declarar variables se necesita crear el segmento de variables escribiendo la palabra clave **variables**, este segmento no puede ser creado en cualquier lugar, revisar el apartado de [secciones](#secciones), ahí se detalla si en una seccion pueden existir variables dato (en general siempre es antes de un comenzar) 
 
 Los tipos posible de variables son:
 - numero: para representar numeros enteros
-- boolean: para representar valores logicos, verdadero o falso
+- boolean: para representar valores lógicos, verdadero (V) o falso (F)
 
-La creacion de la variable sigue la siguiente estructura
+La creación de la variable sigue la siguiente estructura
 
     variables
         nombreDeLaVariable : tipoDeVariable
@@ -409,13 +407,18 @@ Si son del mismo tipo pueden declararse juntas separadas por una ","
 
 ## Operaciones
 
-Como se definio previamente las variables representan valores por lo tanto existen las operaciones que definimos tambien previamente
+Como se definió previamente, las variables representan valores, por lo tanto, podemos realizar operaciones con ellas.
 
-Basicamente las operaciones con variables se dividne en dos grandes grupos, las que involucran lectura de una variable o por el otro las que involucran escritura a una variable
+### Tipos de Operaciones
 
-Lectura
+Las operaciones con variables se dividen en dos grandes grupos:
 
-Para la utilizacion de el valor que representa una variable es tan sencillo como poner el nombre de variable en el lugar donde corresponderia que este el valor que esta representa
+1. **Operaciones de Lectura**: Involucran la obtención del valor de una variable.
+2. **Operaciones de Escritura**: Involucran la asignación o actualización del valor en una variable.
+
+### Lectura
+
+Para utilizar el valor de una variable, basta con colocar el nombre de la variable en el lugar donde debería ir el valor que esta representa.
 
     Por ejemplo:
     
@@ -428,7 +431,7 @@ Para la utilizacion de el valor que representa una variable es tan sencillo como
 
         estado1 & estado2
 
-Escritura
+### Escritura
 
 Para la escritura de un valor en una variable se debe poner la variable a escribir o reescribir su valor luego la sintaxis de asignacion ( := ) y a continuacion el valor explicito o las operaciones que den como resultado un valor, siempre respetando los tipos de dato
 
@@ -453,7 +456,7 @@ Para la escritura de un valor en una variable se debe poner la variable a escrib
         validacionOpuesta := ( n1 >= n2 )
 
         validacionOpuesta := ~ validacionOpuesta
-    
+> [!IMPORTANT]     
 > IMPORTANTE: la variable a ser escrita puede ser leida para el calculo del valor a escribir en ella ya que primero se calcula el valor final a escribir y luego se guarda
 
 
@@ -485,30 +488,34 @@ Estas se dividen en
 
 ## Control
 
-Las intrucciones de control son las que permiten que se ejecute cierta codigo o no, con esto se consigue que un programa reaccione dependiendo de ciertos valores o circunstancias
+### Instrucciones de Control
 
-Las instrucciones se dividen en dos grupo iterativas o no interativas
+Las instrucciones de control son fundamentales, ya que permiten que se ejecute cierto código o no, lo que permite que un programa reaccione dependiendo de ciertos valores o circunstancias.
 
-No iterativas: solo ejecutan el codigo que les presigue una unica vez
+#### Tipos de Instrucciones de Control
 
-Iterativas: pueden ejecutar el codigo que les presigue 1 o mas veces
+Las instrucciones de control se dividen en dos grupos:
 
-Instrucciones:
+1. **No Iterativas**: Estas instrucciones solo ejecutan el código que les sigue una única vez.
+2. **Iterativas**: Estas instrucciones pueden ejecutar el código que les sigue una o más veces.
 
-| Sintaxis | Iterativa |
-| :-: | :-: |
-| si ( condicion/es) | no |
-| sino | no |
-| mientras ( condicion/es) | si |
-| repetir ( numero ) | si |
+##### Instrucciones de Control
+
+| Sintaxis                | Iterativa |
+|-------------------------|-----------|
+| si ( condición/es )     | No        |
+| sino                    | No        |
+| mientras ( condición/es )| Sí        |
+| repetir ( número )      | Sí        |
+
 
 <br>
 
 ### Instruccion si
 
-La instruccion si se utiliza para habilitar o no la ejecucion del bloque de codigo que este identado debajo de esta, este solo se ejecutara si solo si el resultado de la condicion que acompaña al si sea verdadera
+La instruccion si se utiliza para habilitar o no la ejecución del bloque de código que este identado debajo de esta, este solo se ejecutara una vez si y solo si el resultado de la condición que acompaña al si sea verdadera
 
-Estructura del si
+####Estructura del si
 
     si ( condicion )
         bloque
@@ -526,9 +533,9 @@ Un ejemplo de uso del si es guardar el maximo entre dos numeros
 
 ### Instruccion sino
 
-La instruccion sino solo se puede utilizar si previamente existe una instruccion si, ya que esta actua en consecuencia del si. El sino se utiliza para habilitar la ejecucion del bloque de codigo que este identado debajo de este si solo si la condicion que evalua el si dio falsa
+La instrucción sino solo se puede utilizar si previamente existe una instrucción si, ya que esta actúa en consecuencia del si. El sino se utiliza para habilitar la ejecución del bloque de codigo que este identado debajo de este si, solo si la condición que evalua el si resultó falsa
 
-Estructura del sino
+####Estructura del sino
 
     si ( condicion )
         bloque
@@ -539,7 +546,7 @@ Estructura del sino
         de codigo
         a ejecutar
 
-Optimizando el maximo entre dos numeros
+Optimizando el máximo entre dos números
 
     si ( n1 > n2 )
         max := n1
@@ -564,9 +571,9 @@ Otra variante con el mismo efecto es
 
 <br>
 
-### Instruccion mientras
+### Instrucción mientras
 
-La instruccion mientras se utiliza para ejecutar cierto bloque de codigo que este identado debajo de esta tantas veces como la condicion que evalua el mientras de verdad, en caso contrario no ejecuta el codigo y sigue con lo que este por fuera
+La instrucción mientras se utiliza para ejecutar cierto bloque de código que esté indentado debajo de esta tantas veces como la condición que evalua el mientras de verdad, en caso contrario no ejecuta el codigo y sigue con lo que este por fuera
 
 Estructura del mientras
 
@@ -575,7 +582,7 @@ Estructura del mientras
         de codigo
         a ejecutar
 
-Un ejemplo es multiplicar un numero por si mismo mientras no supere un maximo o se multiplique un maximo de 5 veces
+Un ejemplo es multiplicar un numero por si mismo mientras no supere un máximo o se multiplique un máximo de 5 veces
 
     mientras ( ( n < max ) | ( cont < 5 ) )
         n := n * n
@@ -583,9 +590,9 @@ Un ejemplo es multiplicar un numero por si mismo mientras no supere un maximo o 
 
 <br>
 
-### Instruccion repetir
+### Instrucción repetir
 
-La instruccion repetir se utiliza para ejecutar cierto bloque de codigo que este identado debajo de esta tantas veces como lo indique la variable o valor explicito que presigue a la instruccion
+La instrucción repetir se utiliza para ejecutar cierto bloque de código que se encuentre identado debajo de esta tantas veces como lo indique la variable o valor explícito que presigue a la instrucción
 
 Estructura del repetir
 
@@ -607,23 +614,24 @@ Un ejemplo es calcular la potencia de cierto numero
 
 ## Estado
 
-Las instrucciones de estado son las que devuelven un dato que representa el estado de cierta caracteristica del robot con respecto al mapa o a su inventario
+Las instrucciones de estado son las que devuelven un dato que representa el estado de cierta característica del robot con respecto al mapa o a su inventario.
 
-Respecto del mapa existen las instrucciones
+Respecto del mapa, existen las siguientes instrucciones:
 
-| Sintaxis | Tipo de dato que devuelve | Descripcion |
-| :-: | :-: | :-: |
-| PosAv | numero | El numero representa la avenida actual del robot |
-| PosCa | numero | El numero representa la calle actual del robot |
-| HayFlorEnLaEsquina | boolean | El booleano representa si hay una flor en la esquina actual |
-| HayPapelEnLaEsquina | boolean | El booleano representa si hay un papel en la esquina actual |
+| Sintaxis                   | Tipo de dato que devuelve | Descripción                                            |
+|----------------------------|---------------------------|-------------------------------------------------------|
+| PosAv                      | número                    | El número representa la avenida actual del robot.     |
+| PosCa                      | número                    | El número representa la calle actual del robot.       |
+| HayFlorEnLaEsquina        | booleano                  | El booleano representa si hay una flor en la esquina actual. |
+| HayPapelEnLaEsquina       | booleano                  | El booleano representa si hay un papel en la esquina actual.  |
 
-Repecto del inventario existen las intrucciones
+Respecto del inventario, existen las siguientes instrucciones:
 
-| Sintaxis | Tipo de dato que devuelve | Descripcion |
-| :-: | :-: | :-: |
-| HayFlorEnLaBolsa | boolean | El booleano representa si hay una flor en el inventario |
-| HayPapelEnLaBolsa | boolean | El booleano representa si hay un papel en el inventario |
+| Sintaxis               | Tipo de dato que devuelve | Descripción                                              |
+|------------------------|---------------------------|---------------------------------------------------------|
+| HayFlorEnLaBolsa      | booleano                  | El booleano representa si hay una flor en el inventario. |
+| HayPapelEnLaBolsa     | booleano                  | El booleano representa si hay un papel en el inventario.  |
+
 
 [Instrucciones ⬆](#instrucciones)
 
@@ -631,19 +639,20 @@ Repecto del inventario existen las intrucciones
 <br> <br>
 
 
-## Accion
+## Acción
 
-Las instrucciones de accion son las que permiten al robot la interaccion de su inventario con respecto al mapa y viseversa
+Las instrucciones de acción son las que permiten al robot la interacción de su inventario con respecto al mapa y viceversa.
 
-Existen las siguientes instruccion
+Existen las siguientes instrucciones:
 
-| Sintaxis | Accion |
-| :-: | :-: |
-| tomarFlor | toma una flor de la esquina actual y la guarda en el inventario |
-| tomarPapel | toma un papel de la esquina actual y lo guarda en el inventario |
-| depositarFlor | deposita una flor del inventario en la esquina actual |
-| depositarPapel | deposita un papel del inventario en la esquina actual |
+| Sintaxis         | Acción                                                           |
+|------------------|------------------------------------------------------------------|
+| tomarFlor        | Toma una flor de la esquina actual y la guarda en el inventario. |
+| tomarPapel       | Toma un papel de la esquina actual y lo guarda en el inventario. |
+| depositarFlor    | Deposita una flor del inventario en la esquina actual.           |
+| depositarPapel   | Deposita un papel del inventario en la esquina actual.           |
 
+>[!IMPORTANT]
 > IMPORTANTE: de no existir el elemento para la accion ( flor o papel ) el resultado es un error
 
 [Instrucciones ⬆](#instrucciones)
@@ -654,51 +663,54 @@ Existen las siguientes instruccion
 
 ## Desplazamiento
 
-Para el desplazamiento del robot en el mapa existen las siguientes instrucciones
+Para el desplazamiento del robot en el mapa, existen las siguientes instrucciones:
 
-| Sintaxis |
-| :-: |
-| mover |
-| derecha |
-| Pos( avenida, calle ) |
+| Sintaxis              |
+|-----------------------|
+| mover                 |
+| derecha               |
+| Pos(avenida, calle)   |
 
-> IMPORTANTE: tener en cuenta que los desplazamientos tienen que ser validos con respecto a las dimensiones del mapa, el area designada al robot y la posicion de los otros robots de existir otros
-
-<br>
-
-### Instruccion mover
-
-La instruccion mover se utiliza para desplazar al robot 1 posicion en la direccion que se encuentre mirando
-
-| Direccion | Posicion resultado |
-| :-: | :-: |
-| arriva | avenidaActual +1, calleActual |
-| derecha | avenidaActual, calleActual +1 |
-| abajo | avenidaActual -1, calleActual |
-| izquierda | avenidaActual, calleActual -1 |
+>[!NOTE]
+> Tener en cuenta que los desplazamientos tienen que ser válidos con respecto a las dimensiones del mapa, el área designada al robot y la posición de los otros robots de existir otros
 
 <br>
 
-### Instruccion derecha
+### Instrucción mover
 
-La instruccion derecha se utiliza para cambiar la direccion que se encuentra mirando por la consecutiva en sentido horario
+La instrucción **mover** se utiliza para desplazar al robot una posición en la dirección que se encuentre mirando.
 
-| Direccion base | Direccion resultado |
-| :-: | :-: |
-| arriva | derecha |
-| derecha | abajo |
-| abajo | izquierda |
-| izquierda | arriva |
+| Dirección  | Posición resultado                  |
+|------------|------------------------------------|
+| arriba     | avenidaActual + 1, calleActual     |
+| derecha    | avenidaActual, calleActual + 1     |
+| abajo      | avenidaActual - 1, calleActual     |
+| izquierda  | avenidaActual, calleActual - 1     |
+
 
 <br>
 
-### Instruccion Pos
+### Instrucción derecha
 
-La instruccion Pos se utiliza para ubicar al robot en un par ( avenida, calle ) determinado
+La instrucción **derecha** se utiliza para cambiar la dirección en la que se encuentra mirando el robot por la consecutiva en sentido horario.
 
-| Sintaxis |
-| :-: |
-| Pos( numeroDeAvenida, numeroDeCalle ) |
+| Dirección base | Dirección resultado |
+|----------------|---------------------|
+| arriba         | derecha             |
+| derecha        | abajo               |
+| abajo          | izquierda           |
+| izquierda      | arriba              |
+
+<br>
+
+### Instrucción Pos
+
+La instrucción **Pos** se utiliza para ubicar al robot en un par (avenida, calle) determinado.
+
+| Sintaxis                            |
+|-------------------------------------|
+| Pos(numeroDeAvenida, numeroDeCalle) |
+
 
 Ejemplos
 
@@ -714,26 +726,35 @@ Ejemplos
 <br> <br>
 
 
-## Comunicacion
+## Comunicación
 
-La comunicacion es la tranferencia de mensajes hacia el usuario o entre robots
+La comunicación es la transferencia de mensajes hacia el usuario o entre robots.
 
-Las instrucciones son
-- Informar
-- EnviarMensaje
-- RecibirMensaje
+### Instrucciones
+
+| Sintaxis        | Descripción                                           |
+|------------------|-------------------------------------------------------|
+| **Informar**     | Envía un mensaje informativo al usuario.              |
+| **EnviarMensaje**| Envía un mensaje a otro robot.                        |
+| **RecibirMensaje**| Permite al robot recibir un mensaje de otro robot.   |
+
+> [!IMPORTANT]
+> Las instrucciones EnviarMensaje y RecibirMensaje son utilizadas en el módulo de concurrente de la materia Taller de programación. No es necesario entender para qué funcionan si estas cursando la materia EPA o CADP
 
 <br>
 
 ### Instruccion Informar
 
-Para la comunicacion con el usuario, en otras palabras mostrar informacion en pantalla, existe la instruccion Informar
+### Instrucción Informar
 
-| Sintaxis |
-| :-: |
-| Informar( 'cadenaDeCaracteres', valor ) |
+Para la comunicación con el usuario, es decir, para mostrar información en pantalla, se utiliza la instrucción **Informar**.
 
-> IMPORTANTE: el primer parametro no es necesario, puede no utilizarse. El segundo parametro es un valor explicito o variable de cualquier tipo
+| Sintaxis                             | Descripción                                              |
+|--------------------------------------|----------------------------------------------------------|
+| `Informar('cadenaDeCaracteres', valor)` | Muestra en pantalla un mensaje que puede incluir texto y un valor. |
+
+>[!NOTE]
+> El primer parametro no es necesario, puede no utilizarse. El segundo parámetro es un valor explícito o variable de cualquier tipo
 
 Ejemplo de uso
 
@@ -744,17 +765,20 @@ Ejemplo de uso
 
 <br>
 
-### Instruccion EnviarMensaje
+### Instrucción EnviarMensaje
 
-Esta instruccion se utiliza para enviar un valor a un receptor determinado, siendo una variable robot el receptor
+Esta instrucción se utiliza para enviar un valor a un receptor determinado, siendo una variable robot el receptor.
 
-| Sintaxis |
-| :-: |
-| EnviarMensaje( valor, nombreVariableRobot ) |
+| Sintaxis                                 | Descripción                                             |
+|------------------------------------------|---------------------------------------------------------|
+| `EnviarMensaje(valor, nombreVariableRobot)` | Envía un `valor` a un robot específico identificado por `nombreVariableRobot`. |
 
-> IMPORTANTE: el primer parametro es un valor explicito o variable de cualquier tipo
 
-Esta instruccion es asincronica, es decir, se ejecuta y continua la ejecucion. Al emisor del mensaje no le afecta si el receptor esta esperando o no el mensaje
+- **Asincronía:** Esta instrucción es asincrónica, es decir, se ejecuta y continúa la ejecución del código. Al emisor del mensaje no le afecta si el receptor está esperando o no el mensaje.
+- **Parámetro de entrada:** El primer parámetro es una variable donde se guardará el valor que se envió en el mensaje. Esta variable debe ser del mismo tipo que el valor enviado.
+
+> [!NOTE]
+> El primer parámetro es un valor explícito o variable de cualquier tipo
 
 Ejemplo de uso
 
@@ -764,27 +788,26 @@ Ejemplo de uso
 
 <br>
 
-### Instruccion RecibirMensaje
+### Instrucción RecibirMensaje
 
-Esta instruccion se utiliza para recibir un valor de un emisor determinado o no determinado, siendo una variable robot el emisor
+Esta instrucción se utiliza para recibir un valor de un emisor determinado o no determinado, siendo una variable robot el emisor.
 
-| Sintaxis | Emisor |
-| :-: | :-: |
-| RecibirMensaje( variableReceptora, nombreEmisor ) | especifico |
-| RecibirMensaje( variableReceptora, * ) | cualquiera |
+| Sintaxis                                           | Emisor             |
+|---------------------------------------------------|--------------------|
+| `RecibirMensaje(variableReceptora, nombreEmisor)` | Específico         |
+| `RecibirMensaje(variableReceptora, *)`            | Cualquiera         |
 
-Esta instruccion es sincronica, es decir, hasta no recibir el mensaje esperado no continua la ejecucion del codigo
+#### Descripción
 
-El primer parametro es una variable donde se guardara el valor que se envio en el mensaje, esta variable debe ser del mismo tipo que el valor enviado
-
-Si se especifica un emisor puntual el robot que ejecuta la instruccion quedara esperando el mensaje en el caso de que este no este en la cola de mensaje del robot
+- **Sincronía:** Esta instrucción es sincrónica, es decir, hasta no recibir el mensaje esperado, no continúa la ejecución del código.
+- **Parámetro de entrada:** El primer parámetro es una variable donde se guardará el valor que se envió en el mensaje. Esta variable debe ser del mismo tipo que el valor enviado.
 
 Ejemplo de uso
 
     RecibirMensaje( numAvenida, coordinador )
     RecibirMensaje( continuar, jefe )
 
-Si no se especifica un emisor puntual el robot que ejecuta la instruccion quedara esperando un mensaje de cualquier emisor en el caso de que no haya ninguno en la cola de mensaje del robot
+Si no se especifica un emisor puntual el robot que ejecuta la instrucciÓn quedara esperando un mensaje de cualquier emisor en el caso de que no haya ninguno en la cola de mensaje del robot
 
 Ejemplo de uso
 
@@ -797,24 +820,27 @@ Ejemplo de uso
 <br> <br>
 
 
-## Generacion
+# Random
 
-Sobre generacion existe una unica instruccion para generar valores de tipo numero aleatorios dentro de un rango indicado
+Sobre generación, existe una única instrucción para generar valores de tipo número aleatorios dentro de un rango indicado.
 
-La instruccion es
+| Sintaxis                                          |
+|---------------------------------------------------|
+| `Random(variableReceptora, valorMinimo, valorMaximo)` |
 
-| Sintaxis |
-| :-: |
-| Random( variableReceptora, valorMinimo, valorMaximo ) |
+### Descripción
 
-> IMPORTANTE: el valor minimo debe ser menor al maximo de lo contrario hay error, estos valores pueden ser explicitos o variables
+- **Función:** Esta instrucción genera un número aleatorio y lo asigna a `variableReceptora`, el cual estará dentro del rango definido por `valorMinimo` y `valorMaximo`.
+
+>[!NOTA]
+>El `valorMinimo` debe ser menor que el `valorMaximo`; de lo contrario, se generará un error. Estos valores pueden ser explícitos o variables.
 
 Ejemplo de uso
 
     Random( avRandom, 1, 50 )
     Random( cant, 10, max )
 
-[Instrucciones ⬆](#instrucciones)
+[Random⬆](#random)
 
 [indice](#indice)
 
@@ -826,9 +852,7 @@ Ejemplo de uso
 
 ## **Secciones**
 
-Un programa en este lenguage se constituye de secciones ( detalladas a continuacion ) que se encargan cada una de definir un aspecto del programa
-
-Estas se dividen en
+Un programa en este lenguage se constituye de secciones que se encargan cada una de definir un aspecto del programa. A saber: 
 - [programa](#programa)
 - [procesos](#procesos)
 - [areas](#areas)
@@ -840,7 +864,7 @@ Estas se dividen en
 <br> <br>
 
 
-## programa
+### Programa
 
 Esta es la seccion donde se le asigna un nombre al programa
 
@@ -850,8 +874,8 @@ Estructura
 
 El nombre del programa puede estar constituido por:
 
-- Letras minusculas y MAYUSCULAS
-- Numeros
+- Letras minúsculas y MAYÚSCULAS
+- Números
 - Guiones "-" medios y "_" bajos
 
 Ejemplo de uso
@@ -865,9 +889,9 @@ Ejemplo de uso
 <br> <br>
 
 
-## procesos
+### Procesos
 
-Esta es la seccion donde se crean modulos, estos pueden tener o no parametros
+Esta es la sección donde se crean módulos, estos pueden tener o no parámetros
 
 Estructura
 
@@ -885,7 +909,7 @@ Estructura
             el modulo
         fin
 
-> IMPORTANTE:
+> [!NOTE]
 > - Los modulos pueden no necesitar comunicacion de datos, en ese caso se crea el modulo sin parametros solo indicando el nombreDelModulo
 > - Los modulos pueden no necesitar variables locales, en ese caso no se crea la seccion de variables
 
@@ -895,44 +919,51 @@ Para una comunicacion de datos entre el algoritmo del modulo y el lugar donde se
 
 A los parametros en la creacion del modulo se los denomina parametros formales y a los parametros en el llamado al modulo se los denomina parametros actuales
 
-- Parametros formales
+### Parámetros
 
-    Un parametro formal tiene la siguiente declaracion
+#### Parámetros Formales
 
-        tipoDeParametro nombreDelParametro : tipoDeDato
-    
-    Un parametro puede ser de dos tipos
+Un parámetro formal tiene la siguiente declaración:
 
-    - E : entrada
-    - ES : entrada salida
+```tipoDeParametro nombreDelParametro : tipoDeDato```
 
-    Tipo E
 
-    El tipo E significa que el parametro solo es para comunicar informacion hacia el modulo
+Un parámetro puede ser de dos tipos:
 
-    Tipo ES
+- **E:** entrada
+- **ES:** entrada/salida
 
-    El tipo ES significa que el parametro es para comunicar informacion con hacia el modulo y a su vez devolver informacion hacia el exterior del modulo
+##### Tipo E
 
-    El nombre del parametro funcion como una variable en la cual se carga el valor dado en el llamado y/o se devuelve el valor al llamado
+El tipo **E** significa que el parámetro solo es para comunicar información hacia el módulo.
 
-    El tipo de dato define el tipo de variable
+##### Tipo ES
 
-    Si el modulo requiere mas de un parametro, estos se separan con " ; "
+El tipo **ES** significa que el parámetro es para comunicar información hacia el módulo y, a su vez, devolver información hacia el exterior del módulo.
 
-- Parametros actuales
+- El nombre del parámetro funciona como una variable en la cual se carga el valor dado en el llamado y/o se devuelve el valor al llamado.
+- El tipo de dato define el tipo de variable.
 
-    Los parametros actuales son los que envian la informacion hacia el modulo y/o reciben la informacion que este devuelva
+Si el módulo requiere más de un parámetro, estos se separan con `;`.
 
-    En el caso que el parametro formal sea de tipo E, el actual correspondiente puede ser bien un valor explicito o una variable
+---
 
-    En el caso que el parametro formal sea de tipo ES, el actual correspondiente solo puede ser una variable ya que en ella se guarda la devolucion del modulo
+#### Parámetros Actuales
 
-    Si el modulo tiene mas de un parametro, estos se separan con " , "
+Los parámetros actuales son los que envían la información hacia el módulo y/o reciben la información que este devuelva.
 
-Los parametros formales y actuales se vinculan por la posicion, en otras palabras el primer formal con el primer actual y asi con los sucesibos
+- En el caso de que el parámetro formal sea de tipo **E**, el actual correspondiente puede ser bien un valor explícito o una variable.
+- En el caso de que el parámetro formal sea de tipo **ES**, el actual correspondiente solo puede ser una variable, ya que en ella se guarda la devolución del módulo.
 
-En el llamado al modulo debe existir igual cantidad de parametros que en la creacion de este y los tipos de datos que representa cada uno debe corresponder con su correspondiente en terminos de posiciones
+Si el módulo tiene más de un parámetro, estos se separan con `,`.
+
+---
+
+#### Vinculación de Parámetros Formales y Actuales
+
+Los parámetros formales y actuales se vinculan por la posición. En otras palabras, el primer formal se empareja con el primer actual, el segundo formal con el segundo actual, y así sucesivamente.
+
+En el llamado al módulo debe existir igual cantidad de parámetros que en la creación de este, y los tipos de datos que representa cada uno deben corresponder con su respectivo en términos de posición.
 
 Ejemplos de uso
 
@@ -965,7 +996,7 @@ Ejemplos de uso
                 derecha
         fin
 
-Dentro de un modulo puede llamarse a otros modulos, de esta manera se produce un anidamiento de modulos que es positivo siempre y cuando se consiga una separacion de tareas que aumente la legibilidad y reusabilidad del codigo
+Dentro de un modulo puede llamarse a otros módulos, de esta manera se produce un anidamiento de módulos que es positivo siempre y cuando se consiga una separación de tareas que aumente la legibilidad y reusabilidad del codigo
 
 Ejemplo de uso
 
@@ -999,9 +1030,9 @@ Ejemplo de uso
 <br> <br>
 
 
-## areas
+## Areas
 
-Esta es la seccion donde se crean areas del mapa donde los robots podran interactuar. Las areas son regiones cuadradas del mapa donde las avenidas y calles que componen cada una solo pueden estar incluidas en una unica declaracion de area
+Las áreas son regiones del mapa donde las avenidas y calles que componen cada una de dichas áreas solo pueden estar incluidas en una única declaración de estas.
 
 Estructura
 
@@ -1009,25 +1040,25 @@ Estructura
 
         nombreArea : tipoDeArea( region )
 
-El nombre del area es lo que permite mas adelante referenciar esta definicion en la asignacion de areas de un robot
+El nombre del área es lo que permite mas adelante referenciar esta definición en la asignación de áreas de un robot
 
-Existen tres tipos de areas:
+Existen tres tipos de áreas:
 
-- AreaC : area compartida
-- AreaP : area privada
-- AreaPC : area parcialmente compartida
+- AreaC : área compartida
+- AreaP : área privada
+- AreaPC : área parcialmente compartida
 
-AreaC
+### AreaC
 
-Este tipo es para definir que cierta region es compartida por los robots, esto quiere decir que a todos los robots se le asiganara esta area, consecuentemente quiere decir que podran interactuar en esta region
+Este tipo es para definir que cierta región es compartida por los robots, esto quiere decir que a todos los robots se le asiganara esta área, consecuentemente quiere decir que podran interactuar en esta region
 
-AreaP
+### AreaP
 
-Este tipo es para definir que cierta region es de un unico robot, esto quiere decir que solo a un robot se le asignara esta area, consecuentemente este es el unico que podra interactuar en esta region
+Este tipo es para definir que cierta region es de un único robot, esto quiere decir que solo a un robot se le asignara esta área, consecuentemente este es el único que podra interactuar en esta región
 
-AreaPC
+### AreaPC
 
-Este tipo es para definir que cierta region es compartida por al menos dos robots y no es compartida por al menos un robot, esto quiere decir que se le asigna a almenos 2 robots y a almenos 1 no
+Este tipo es para definir que cierta region es compartida por al menos dos robots, esto quiere decir que se le asigna a al menos 2 robots 
 
 La region es un cuadrado que se delimita por dos conjuntos:
 
@@ -1047,7 +1078,8 @@ Ejemplo de uso
         zonaPrivada : AreaP( 11, 1, 100, 10 )
         areaTrabajo : AreaPC( 50, 50, 55, 60 )
 
-> IMPORTANTE: los valores iniciales deben ser menores o iguales a los valores finales, ademas se debe respetar el tamaño del mapa
+> [!IMPORTANT]
+> Los valores iniciales deben ser menores o iguales a los valores finales, ademas se debe respetar el tamaño del mapa
 
 [Secciones ⬆](#secciones)
 
@@ -1055,9 +1087,9 @@ Ejemplo de uso
 <br> <br>
 
 
-## robots
+## Robots
 
-Esta es la seccion donde se definene los algoritmos que un cierto tipo de robot tendra que hacer durante la ejecucion del programa
+Esta es la sección donde se definene los algoritmos que un cierto tipo de robot tendra que hacer durante la ejecucion del programa
 
 > IMPORTANTE: dos tipos de robot pueden tener los mismos algoritmos y ejecutarlos perfectamente, pero en el caso que dos tipos de robot tengan exactamente las mismas tareas lo mas adecuado es tener dos variables robots del mismo tipo, cada una trabajando "independientemente"
 
@@ -1076,13 +1108,28 @@ Estructura
             este tipo de robot
         fin
 
-> IMPORTANTE: el nombreTipoRobot debe ser unico
+> [!NOTE]
+> El nombreTipoRobot debe ser unico
 
-Cuando se declara el tipo de robot la seccion de variables solo debe ser agregada en el caso que el robot necesite variables numericas y/o booleanas de lo contrario no es necesario que este
+### Declaración del Tipo de Robot
 
-En el apartado comenzar ... fin es similar a el comenzar ... fin de la seccion de [procesos](#procesos) ya que es donde se crea el algoritmo del robot el cual al momento d ela ejecucion del programa se usara para que el robot realize tareas como moverse, interactuar con el mapa, realizar operaciones aritmeticas/logicas, comunicacion entre otras
+Al declarar el tipo de robot, es importante tener en cuenta lo siguiente:
 
-Normalmente un tipo de robot se define para un labor especifica que puede englobar tareas asociadas a esta labor, si se quiere hacer un uso optimo de los tipos de robot se descompone el problema en labores y se las asigna a diferentes robots para distribuir la carga de manera que se responda a la problematica de manera eficiente
+- **Sección de Variables:** 
+  - La sección de variables solo debe ser agregada si el robot necesita variables numéricas y/o booleanas. En caso contrario, no es necesario incluir esta sección.
+
+#### Estructura de Comienzo ... Fin
+
+El apartado **comenzar ... fin** es similar a la sección de **[procesos](#procesos)**. En este bloque, se crea el algoritmo del robot, que se utilizará durante la ejecución del programa para que el robot realice tareas como:
+
+- Moverse
+- Interactuar con el mapa
+- Realizar operaciones aritméticas/lógicas
+- Comunicarse con otros elementos
+
+#### Uso Óptimo de Tipos de Robot
+
+Normalmente, un tipo de robot se define para una labor específica que puede englobar tareas asociadas a esta labor. Para hacer un uso óptimo de los tipos de robot, es recomendable descomponer el problema en labores y asignar diferentes robots para distribuir la carga de manera eficiente. Esto permite responder a la problemática de forma más efectiva.
 
 Ejemplo de uso
 
@@ -1113,23 +1160,20 @@ Ejemplo de uso
 <br> <br>
 
 
-## variables
+## Variables
 
-Esta es la seccion donde se declaran las variables robot de un determinado tipo de robot cada una
+# Sección de Variables del Robot
 
-Las variables robot son las que se encargan de ejecutar los algoritmos que se definen en el programa
+Esta es la sección donde se declaran las variables para un determinado tipo de robot.
 
-Estructura
+## Variables Robot
 
-    variables
+Las variables robot son las encargadas de ejecutar los algoritmos que se definen en el programa.
 
-        nombreVariableRobot: nombreTipoRobot
+> [!NOTE]
+> No puede haber dos variables robot con el mismo nombre, este debe ser único
 
-El nombreVariableRobot es el nombre que tendra el robot durante la ejecucion
-
-> IMPORTANTE: no puede haber dos variables robot con el mismo nombre, este debe ser unico
-
-El nombreTipoRobot es el nombre con el cual se definio un tipo de robot en la seccion de [robots](#robots)
+El nombreTipoRobot es el nombre con el cual se definió un tipo de robot en la seccion de [robots](#robots)
 
 Ejemplo de uso
 
@@ -1145,7 +1189,7 @@ Ejemplo de uso
 <br> <br>
 
 
-## comenzar y fin
+## Comenzar y fin
 
 Esta es la seccion donde se le asignan las areas correspondientes a cada variable robot y ademas su correspondiente posicionamiento inicial en el mapa
 
@@ -1158,9 +1202,10 @@ Estructura
     
     fin
 
-> IMPORTANTE: el nombreArea debe estar definido correctamente en la seccion de [areas](#areas) de igual manera que el nombreVariablesRobot debe estar definido correctamente en la seccion de [variables](#variables). Los valores indicados en el iniciar deben pertener a alguna de de las areas asignadas previamente
+> [!NOTE]
+> El nombreArea debe estar definido correctamente en la seccion de [áreas](#areas) de igual manera que el nombreVariablesRobot debe estar definido correctamente en la sección de [variables](#variables). Los valores indicados en el iniciar deben pertener a alguna de de las áreas asignadas previamente
 
-A una variable robot se le pueden asignar multiples areas (siempre y cuando se respete el tipo de area definido) pero unicamente se incia en un punto del mapa
+A una variable robot se le pueden asignar múltiples areas (siempre y cuando se respete el tipo de área definido) pero únicamente se incia en un punto del mapa
 
 Ejemplo de uso:
 
@@ -1183,42 +1228,3 @@ Ejemplo de uso:
 
 
 
-## **Glosario**
-
-Estas son definiciones de terminos y conceptos utilizados en el documento
-
-1. camelCase: es la escritura de un conjunto de palabras donde se intercambian los espacios por la mayuscula de la palabra siguiente
-
-1. UpperCamelCase: como camelCase pero la primera palabra tambien comienza con mayuscula
-
-1. lower_camel_case: a diferencia del camelCase de esta forma se reemplazan los espacios por guiones bajos
-
-1. Declarar: es la creacion de algo
-
-1. Inicializar: es darle el primer valor
-
-1. Asignar: es darle un valor a una variable
-
-1. Condicion: valor booleano u operacion logica ( tambien puede ser conjunto de operaciones logicas ) que determina si se realiza o no determinada instruccion/es+
-
-1. Validacion: es el acto de verificar si se cumplen determinadas condiciones/valores
-
-1. Sintaxis: palabras y/o conjunto de caracteres que el lenguage de programacion utiliza para determinadas funciones/propositos/instrucciones
-
-1. Identacion: dejar un espacio determinado antes de una linea de codigo para indicar que pertenecen a cierto bloque de codigo y/o seccion del programa
-
-1. Bloque de codigo: conjunto de lineas de codigo con la misma identacion que se ejecutan juntas en el orden en el que estan escritas
-
-[Glosario ⬆](#glosario)
-
-[indice](#indice)
-
-
-
-<br> <br> <br>
-
-
-
-Hecho por compañeros de la Facultad
-
-Fin del documento.
