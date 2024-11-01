@@ -112,7 +112,7 @@ Los operadores lógicos producen valores booleanos (verdad o falsedad) en funci�
 | Sintaxis | Nombre/s           |
 |:--------:|:-------------------:|
 | `~`      | Negación, No       |
-| `|`      | Disyunción, Ó      |
+| `'|'`      | Disyunción, Ó      |
 | `&`      | Conjunción, Y      |
 | `=`      | Igualación, Igual  |
 | `<>`     | Diferente, Distinto|
