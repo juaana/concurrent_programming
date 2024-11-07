@@ -1,0 +1,149 @@
+{Realice un programa en el que 4 robots mueven de a una todas las flores de la esquina
+(10,10) a la esquina (11,11). Para ello, cada robot que toma una flor de la esquina (10,10) la
+deposita en la esquina (11,11) y luego retorna a su esquina inicial. Cada robot que finaliza
+(o, sea, que detecta que la esquina (10,10) se ha vaciado) deberá avisar al robot
+coordinador que ha finalizado. Cuando todos los robots finalizaron, el robot coordinador
+deberá informar qué robot finalizó último y a continuación deberá recolectar todas las flores
+de la esquina (11,11)..}
+
+programa ejemplo
+procesos
+  proceso juntarFlor(ES flores: numero; ES hayFlor: boolean )
+  comenzar
+    si HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores +1
+      hayFlor:= V
+    sino 
+      hayFlor:= F
+  fin
+  proceso robotJuntador
+  variables
+    ID, AvA, CaA, totalFlores, flores: numero
+    hayFlor, soyUltimo: boolean
+  comenzar
+    RecibirMensaje(ID, jefe)
+    AvA:= PosAv
+    CaA:=PosCa
+    hayFlor:= V
+    flores:= 0
+    soyUltimo:= V
+    totalFlores:= 0
+    mientras (hayFlor = V)
+      BloquearEsquina(10,10)
+      Pos(10,10)
+      juntarFlor(flores, hayFlor)
+      Pos(AvA,CaA)
+      LiberarEsquina(10,10)
+      BloquearEsquina(11,11)
+      Pos(11,11) 
+      si (hayFlor = V)
+        depositarFlor
+      sino 
+        EnviarMensaje(ID, jefe)
+      Pos(AvA, CaA)
+      LiberarEsquina(11,11)
+    EnviarMensaje(flores, jefe)
+    RecibirMensaje(soyUltimo, jefe)
+    si (soyUltimo = V)
+      RecibirMensaje(totalFlores, jefe)
+      Pos(11,11)
+      repetir totalFlores
+        tomarFlor
+      Pos(AvA,CaA)
+  fin
+  proceso robotJefe
+  variables
+    ID, flores, floresTotales: numero
+  comenzar
+    ID:= 0
+    flores:= 0
+    floresTotales:= 0
+    EnviarMensaje(1, robot1)
+    EnviarMensaje(2, robot2)
+    EnviarMensaje(3, robot3)
+    EnviarMensaje(4, robot4)
+    repetir 4
+      RecibirMensaje(ID, *)
+      si (ID =1 )
+        RecibirMensaje(flores, robot1)
+        floresTotales:= floresTotales + flores
+      sino
+        si (ID =2)
+          RecibirMensaje(flores, robot2)
+          floresTotales:= floresTotales + flores
+        sino
+          si(ID =3) 
+            RecibirMensaje(flores, robot3)
+            floresTotales:= floresTotales + flores
+          sino
+            RecibirMensaje(flores, robot4)
+            floresTotales:= floresTotales + flores
+    si (ID = 1)
+      EnviarMensaje(V, robot1)
+      EnviarMensaje(F, robot2)
+      EnviarMensaje(F, robot3)
+      EnviarMensaje(F, robot4)
+      EnviarMensaje(floresTotales, robot1)
+    sino 
+      si (ID = 2)
+        EnviarMensaje(F, robot1)
+        EnviarMensaje(V, robot2)
+        EnviarMensaje(F, robot3)
+        EnviarMensaje(F, robot4)
+        EnviarMensaje(floresTotales, robot2)
+      sino
+        si (ID =3) 
+          EnviarMensaje(F, robot1)
+          EnviarMensaje(F, robot2)
+          EnviarMensaje(V, robot3)
+          EnviarMensaje(floresTotales, robot3)
+          EnviarMensaje(F, robot4)
+          EnviarMensaje(floresTotales, robot3)
+        sino
+          EnviarMensaje(F, robot1)
+          EnviarMensaje(F, robot2)
+          EnviarMensaje(F, robot3)
+          EnviarMensaje(V, robot4)
+          EnviarMensaje(floresTotales, robot4)     
+  fin
+areas
+  PostaJuntar:AreaPC (10,10,10,10)
+  PostaDeposito: AreaPC(11,11,11,11)
+  AJ: AreaP(1,1,1,1)
+  A1: AreaP(9,9,9,9)
+  A2: AreaP(9,10,9,10)
+  A3: AreaP(9,11,9,11)
+  A4: AreaP(9,12,9,12)
+robots
+  robot juntador
+  comenzar
+    robotJuntador
+  fin
+  robot jefe
+  comenzar
+    robotJefe
+  fin 
+variables 
+  robot1, robot2, robot3, robot4: juntador
+  jefe: jefe
+comenzar
+  AsignarArea(robot1,PostaJuntar)
+  AsignarArea(robot2,PostaJuntar)
+  AsignarArea(robot3,PostaJuntar)
+  AsignarArea(robot4,PostaJuntar)
+  AsignarArea(robot1,PostaDeposito)
+  AsignarArea(robot2,PostaDeposito)
+  AsignarArea(robot3,PostaDeposito)
+  AsignarArea(robot4,PostaDeposito)
+  AsignarArea(robot1,A1)
+  AsignarArea(robot2,A2)
+  AsignarArea(robot3,A3)
+  AsignarArea(robot4,A4)
+  AsignarArea(jefe, AJ)
+  Iniciar(jefe, 1,1)
+  Iniciar(robot1, 9,9)
+  Iniciar(robot2, 9,10)
+  Iniciar(robot3, 9,11)
+  Iniciar(robot4, 9,12)
+fin

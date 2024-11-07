@@ -1,0 +1,99 @@
+{1- Realice un programa con 2 robots recolectores de flores (floreros) y 2 robots recolectores
+de papeles (papeleros).
+Los floreros comparten área y tienen 5 intentos cada uno para juntar las flores de una
+esquina, dentro de dicha área, elegida al azar en cada intento. Del mismo modo, los
+papeleros comparten área y tienen 3 intentos cada uno para juntar los papeles. En cada
+intento cada robot va a la esquina al azar, junta todos los elementos (flores o papeles según
+le corresponda) y vuelve a su esquina original. Al finalizar sus intentos cada robot debe
+acceder a la esquina (10, 10) y depositar los elementos recogidos de a uno.
+- Área de floreros: (1,1) a (5, 10)
+- Área de papeleros: (6, 1) a (10, 9)
+- Esquinas de inicio de floreros: (6,10) y (7,10)
+- Esquinas de inicio de papeleros: (8,10) y (9,10}
+
+programa ejemplo
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores +1 
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      papeles:= papeles +1 
+  fin
+areas
+  f1: AreaP(6,10,6,10)
+  f2: AreaP(7,10,7,10)
+  p1: AreaP(8,10,8,10)
+  p2: AreaP(9,10,9,10)
+  terrenoFloreros: AreaPC(1,1,5,10)
+  terrenoPapeleros: AreaPC(6,1,10,9)
+  deposito: AreaPC(10,10,10,10)
+robots
+  robot florero
+  variables
+    calleR, avenidaR, calleA, avenidaA, flores: numero
+  comenzar
+    avenidaA:= PosAv
+    calleA:= PosCa
+    repetir 5
+      Random(avenidaR, 1,5)
+      Random(calleR, 1,10)
+      BloquearEsquina(avenidaR, calleR)
+      Pos(avenidaR,calleR)
+      juntarFlores(flores)
+      Pos(avenidaA,calleA)
+      LiberarEsquina(avenidaA, calleA)
+    repetir flores
+      BloquearEsquina(10,10)
+      Pos(10,10)
+      depositarFlor
+      Pos(avenidaA, calleA)
+      LiberarEsquina(10,10)
+  fin
+  robot papelero
+  variables 
+    calleR, avenidaR, calleA, avenidaA, papeles: numero 
+  comenzar 
+    avenidaA:= PosAv 
+    calleA:= PosCa 
+    repetir 3 
+      Random(avenidaR, 6,10) 
+      Random(calleR, 1,9) 
+      BloquearEsquina(avenidaR, calleR) 
+      Pos(avenidaR,calleR) 
+      juntarPapeles(papeles) 
+      Pos(avenidaA,calleA) 
+      LiberarEsquina(avenidaA, calleA) 
+    repetir papeles
+      BloquearEsquina(10,10)
+      Pos(10,10) 
+      depositarPapel
+      Pos(avenidaA, calleA) 
+      LiberarEsquina(10,10) 
+  fin
+variables
+  florero1,florero2: florero
+  papelero1, papelero2: papelero
+comenzar
+  AsignarArea(florero1, terrenoFloreros)
+  AsignarArea(florero2, terrenoFloreros)
+  AsignarArea(papelero1, terrenoPapeleros)
+  AsignarArea(papelero2, terrenoPapeleros)
+  AsignarArea(florero1,deposito)
+  AsignarArea(florero2,deposito)
+  AsignarArea(papelero1, deposito)
+  AsignarArea(papelero2, deposito)
+  AsignarArea(florero1, f1)
+  AsignarArea(florero2, f2)
+  AsignarArea(papelero1, p1)
+  AsignarArea(papelero2, p2)
+  Iniciar(florero1, 6,10)
+  Iniciar(florero2, 7,10)
+  Iniciar(papelero1, 8,10)
+  Iniciar(papelero2, 9,10)
+fin

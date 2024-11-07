@@ -1,0 +1,92 @@
+programa ejemplo
+procesos
+  proceso evaluarID(ES ID: numero; ES calle: numero)
+  comenzar
+    si (ID = 1)
+      RecibirMensaje(calle, robot1)
+    sino
+      si (ID =2)
+        RecibirMensaje(calle, robot2)
+      sino
+        si (ID = 3)
+          RecibirMensaje(calle, robot3)
+        sino 
+          RecibirMensaje(calle, robot4)
+  fin
+  proceso evaluarMaximo(ES calle: numero;ES calleMax: numero ES robotMax: numero; E ID: numero)
+  comenzar
+    si (calleMax < calle)
+      robotMax:= ID
+      calleMax:= calle
+  fin 
+areas
+  fuente: AreaPC (11,11,11,11)
+  a1: AreaP(4,1,4,100)
+  a2: AreaP(6,1,6,100)
+  a3: AreaP(8,1,8,100)
+  a4: AreaP(10,1,10,100)  
+  aJ: AreaP(1,1,1,1)
+robots
+  robot corredor 
+  variables 
+    AvA, CaA, ID: numero 
+    HayMas: boolean 
+  comenzar 
+    AvA:= PosAv 
+    CaA:= PosCa 
+    HayMas:= V 
+    RecibirMensaje(ID, jefe) 
+    mientras PosCa < 100 & HayMas = V 
+      BloquearEsquina(11,11) 
+      Pos(11,11) 
+      si HayPapelEnLaEsquina
+        tomarPapel 
+        Pos(AvA, CaA)   
+        LiberarEsquina(11,11) 
+        depositarPapel
+        mover 
+        CaA:= CaA+1 
+      sino 
+        HayMas:= F 
+        Pos(AvA,CaA) 
+        LiberarEsquina(11,11)     
+    EnviarMensaje(ID, jefe) 
+    EnviarMensaje(CaA, jefe)      
+  fin 
+  robot jefe
+  variables 
+    ID, calle, robotMax, calleMax: numero 
+  comenzar 
+    ID:= 0 
+    calle:= 0 
+    robotMax:= 0 
+    calleMax:= -1 
+    EnviarMensaje(1, robot1) 
+    EnviarMensaje(2, robot2) 
+    EnviarMensaje(3, robot3) 
+    EnviarMensaje(4, robot4) 
+    repetir 4 
+      RecibirMensaje(ID, *) 
+      evaluarID(ID, calle)  
+      evaluarMaximo(calle, calleMax, robotMax, ID) 
+    Informar(robotMax)
+  fin 
+variables
+  robot1, robot2, robot3, robot4: corredor 
+  jefe: jefe 
+comenzar
+  AsignarArea(robot1, fuente)
+  AsignarArea(robot2, fuente)
+  AsignarArea(robot3, fuente)
+  AsignarArea(robot4, fuente)
+  AsignarArea(jefe, aJ)
+  AsignarArea(robot1, a1)
+  AsignarArea(robot2, a2)
+  AsignarArea(robot3, a3)
+  AsignarArea(robot4, a4)
+  Iniciar(jefe, 1,1)
+  Iniciar(robot1, 4,1)
+  Iniciar(robot2, 6,1)
+  Iniciar(robot3, 8,1)
+  Iniciar(robot4, 10,1)
+fin

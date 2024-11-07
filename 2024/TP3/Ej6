@@ -1,0 +1,214 @@
+programa ejemplo
+procesos
+  proceso recorrerBloqueandoJuntandoFlores(E avenida: numero; E calle: numero; ES flores: numero)
+  comenzar
+    BloquearEsquina(avenida, calle) 
+    mover
+    juntarFlores(flores)
+    mover
+    LiberarEsquina(avenida, calle)
+  fin
+  proceso recorrerLibreJuntandoFlores(E repeticion: numero; ES flores:numero)
+  comenzar
+    repetir repeticion
+      juntarFlores(flores) 
+      mover
+  fin  
+  proceso recorrerBloqueandoJuntandoPapeles(E avenida: numero; E calle: numero; ES papeles: numero)
+  comenzar
+    BloquearEsquina(avenida,calle)  
+    mover 
+    juntarPapeles(papeles) 
+    mover
+    LiberarEsquina(avenida, calle)
+  fin 
+  proceso recorrerLibreJuntandoPapeles(E repeticion: numero; ES papeles: numero) 
+  comenzar 
+    repetir repeticion 
+      juntarPapeles(papeles) 
+      mover
+  fin  
+  proceso recorrerBloqueandoJuntandoFloresPapeles(E avenida: numero; E calle: numero;ES flores: numero; ES papeles: numero)
+  comenzar
+    BloquearEsquina(avenida,calle)  
+    mover 
+    juntarPapeles(papeles)
+    juntarFlores(flores) 
+    mover
+    LiberarEsquina(avenida, calle)
+  fin  
+  proceso recorrerLibreJuntandoFloresPapeles(E repeticion: numero;ES flores: numero; ES papeles: numero) 
+  comenzar 
+    repetir repeticion
+      juntarPapeles(papeles) 
+      juntarFlores(flores)
+      mover
+  fin   
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores+1
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar 
+    mientras HayPapelEnLaEsquina 
+      tomarPapel
+      papeles:= papeles +1
+  fin 
+  proceso juntarFloresYPapeles(ES flores: numero; ES papeles: numero)
+  comenzar
+    juntarPapeles(papeles)
+    juntarFlores(flores) 
+  fin
+  proceso cuadradoFlores(ES flores: numero)
+  comenzar
+    recorrerLibreJuntandoFlores(6, flores)
+    derecha
+    recorrerLibreJuntandoFlores(2, flores)
+    recorrerBloqueandoJuntandoFlores(5,8,flores)
+    recorrerLibreJuntandoFlores(2, flores)
+    derecha
+    recorrerLibreJuntandoFlores(2, flores)
+    recorrerBloqueandoJuntandoFlores(8,5,flores)
+    recorrerLibreJuntandoFlores(2, flores)
+    derecha
+    recorrerLibreJuntandoFlores(6, flores)
+    derecha 
+  fin
+  proceso cuadradoFloresPapeles(ES flores: numero; ES papeles: numero)
+  comenzar  
+    recorrerLibreJuntandoFloresPapeles(2,flores,papeles)
+    recorrerBloqueandoJuntandoFloresPapeles(5, 8,flores,papeles)
+    recorrerLibreJuntandoFloresPapeles(6,flores,papeles)
+    derecha
+    recorrerLibreJuntandoFloresPapeles(3,flores,papeles)
+    recorrerBloqueandoJuntandoFloresPapeles(9, 15,flores,papeles)
+    recorrerLibreJuntandoFloresPapeles(5,flores,papeles)
+    derecha
+    recorrerLibreJuntandoFloresPapeles(5,flores,papeles)
+    recorrerBloqueandoJuntandoFloresPapeles(15, 9,flores,papeles)
+    recorrerLibreJuntandoFloresPapeles(3,flores,papeles)
+    derecha
+    recorrerLibreJuntandoFloresPapeles(6,flores,papeles)
+    recorrerBloqueandoJuntandoFloresPapeles(8, 5,flores,papeles)
+    recorrerLibreJuntandoFloresPapeles(2,flores,papeles)
+    derecha
+  fin  
+  proceso cuadradoPapeles(ES papeles: numero)
+  comenzar 
+    recorrerLibreJuntandoPapeles(5,papeles)
+    recorrerBloqueandoJuntandoPapeles(9, 15,papeles)
+    derecha
+    recorrerLibreJuntandoPapeles(7,papeles)
+    derecha
+    recorrerLibreJuntandoPapeles(7,papeles) 
+    derecha
+    recorrerBloqueandoJuntandoPapeles(15, 9,papeles)
+    recorrerLibreJuntandoPapeles(5,papeles) 
+    derecha
+  fin 
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot robot1
+  variables
+    ID,flores, calle: numero
+  comenzar
+    flores:= 0
+    RecibirMensaje(ID, jefe)
+    cuadradoFlores(flores)
+    EnviarMensaje(ID, jefe)
+    RecibirMensaje(calle, jefe)  
+    Pos(1, calle)
+    derecha
+    repetir flores
+      si (PosAv<=99)
+        depositarFlor
+        mover
+      sino
+        depositarFlor
+  fin
+  robot robot2
+  variables
+    ID,flores, papeles, calle: numero
+    final: boolean
+  comenzar
+    papeles:= 0  
+    flores:= 0
+    calle:= 0
+    final:= F
+    RecibirMensaje(ID, jefe)
+    cuadradoFloresPapeles(flores, papeles)
+    EnviarMensaje(ID, jefe)
+    RecibirMensaje(calle, jefe)  
+    Pos(1, calle)
+    derecha
+    mientras (PosAv < 99) & (final =F) 
+      si (flores > 0) & (papeles>0)
+        depositarPapel
+        depositarFlor
+        mover
+        flores:= flores -1 
+        papeles:= papeles -1
+      sino
+        final:= V
+    si (flores > 0) & (papeles > 0)
+      depositarFlor
+      depositarPapel
+      flores:= flores -1 
+      papeles:= papeles -1
+  fin
+  robot robot3
+  variables
+    ID, papeles, calle: numero
+  comenzar
+    papeles:= 0
+    RecibirMensaje(ID, jefe)
+    cuadradoPapeles(papeles)
+    EnviarMensaje(ID, jefe)
+    RecibirMensaje(calle, jefe)  
+    Pos(1, calle)
+    derecha
+    repetir papeles
+      si (PosAv<=99)
+        depositarPapel 
+        mover
+      sino
+        depositarPapel
+  fin
+  robot jefe
+  variables
+    ID, calle: numero
+  comenzar
+    ID:= 0
+    calle:= 20
+    EnviarMensaje(1, robot1)
+    EnviarMensaje(2, robot2)
+    EnviarMensaje(3, robot3)
+    repetir 3
+      RecibirMensaje(ID, *)
+      si (ID = 1)
+        EnviarMensaje(calle, robot1)
+      sino
+        si(ID= 2)
+          EnviarMensaje(calle, robot2)
+        sino
+          EnviarMensaje(calle, robot3)
+      calle:= calle +1
+  fin
+variables
+  robot1: robot1
+  robot2: robot2
+  robot3: robot3
+  jefe: jefe
+comenzar
+  AsignarArea(robot1, ciudad)
+  AsignarArea(robot2, ciudad)
+  AsignarArea(robot3, ciudad)
+  AsignarArea(jefe, ciudad)
+  Iniciar(robot1, 2,2)
+  Iniciar(robot2, 5,5)
+  Iniciar(robot3, 9,9)
+  Iniciar(jefe, 1,1)
+fin

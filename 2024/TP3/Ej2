@@ -1,0 +1,134 @@
+programa ejemplo
+procesos
+  proceso girar(E cantidad: numero) 
+  comenzar
+    repetir cantidad 
+      derecha 
+  fin
+  proceso juntarFlores(ES flores: numero)  
+  comenzar
+    mientras HayFlorEnLaEsquina 
+      tomarFlor 
+      flores:= flores +1 
+  fin
+  proceso escalonFlores(ES flores: numero; ES cant: numero)
+  comenzar 
+    repetir cant 
+      juntarFlores(flores)
+      mover         
+  fin
+  proceso juntarPapeles(ES papeles: numero)  
+  comenzar 
+    mientras HayPapelEnLaEsquina 
+      tomarPapel 
+      papeles:= papeles +1 
+  fin 
+  proceso escalonPapeles(ES papeles: numero; ES cant: numero) 
+  comenzar  
+    repetir cant 
+      juntarPapeles(papeles) 
+      mover         
+  fin     
+  proceso escaleraFlores(ES flores: numero) 
+  variables 
+    cant: numero 
+  comenzar
+    cant:= 5 
+    repetir 4
+      repetir 2 
+        escalonFlores(flores,cant)
+        girar(1)
+      girar(2) 
+      cant:= cant-1  
+    juntarFlores(flores)
+    mover
+    girar(1)
+    juntarFlores(flores)
+    BloquearEsquina(16,16)
+    mover
+    juntarFlores(flores)
+    girar(2)
+    mover
+    LiberarEsquina(16,16)
+    cant:= 2
+    repetir 4
+      repetir 2
+        escalonFlores(flores,cant)
+        girar(1)
+      girar(2)
+      cant:= cant+1       
+  fin
+  proceso escaleraPapeles(ES papeles: numero) 
+  variables  
+    cant: numero  
+  comenzar 
+    cant:= 5  
+    repetir 4 
+      repetir 2  
+        escalonPapeles(papeles,cant) 
+        girar(3) 
+      girar(2)
+      cant:= cant-1  
+    cant:= 1   
+    juntarPapeles(papeles)
+    mover
+    juntarPapeles(papeles)
+    girar(3)
+    BloquearEsquina(16,16)
+    mover
+    juntarPapeles(papeles)
+    girar(2)
+    mover
+    LiberarEsquina(16,16)
+    cant:= cant+1
+    repetir 4
+      repetir 2
+        escalonPapeles(papeles,cant)
+        girar(3)
+      girar(2)
+      cant:= cant+1    
+  fin  
+areas 
+  AreaComun: AreaC(1,1,31,30)
+robots
+  robot robot1
+  variables
+    flores, id: numero
+  comenzar
+    RecibirMensaje( id, jefe)
+    escaleraFlores(flores)
+    EnviarMensaje( id, jefe)
+  fin
+  robot robot2 
+  variables 
+    papeles, id: numero
+  comenzar 
+    RecibirMensaje(id,jefe)
+    escaleraPapeles(papeles)
+    EnviarMensaje(id, jefe)
+  fin  
+  robot jefe
+  variables
+    id: numero
+  comenzar
+    EnviarMensaje(1, rFlores)
+    EnviarMensaje( 2, rPapeles)
+    RecibirMensaje( id, *)
+    si (id=1)
+      Informar("Ganador ", id)
+    sino
+      Informar('Ganador ' , id)
+  fin
+  
+variables 
+  rFlores: robot1
+  rPapeles: robot2
+  jefe: jefe
+comenzar
+  AsignarArea(rFlores, AreaComun)
+  AsignarArea(rPapeles, AreaComun)
+  AsignarArea(jefe, AreaComun)
+  Iniciar(rFlores, 1,1)
+  Iniciar(rPapeles, 31,1)
+  Iniciar(jefe, 15,1)
+fin
