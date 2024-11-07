@@ -112,7 +112,7 @@ Los operadores lógicos producen valores booleanos (verdad o falsedad) en funci�
 | Sintaxis | Nombre/s           |
 |:--------:|:-------------------:|
 | `~`      | Negación, No       |
-| `|`      | Disyunción, Ó      |
+| \|      | Disyunción, O      |
 | `&`      | Conjunción, Y      |
 | `=`      | Igualación, Igual  |
 | `<>`     | Diferente, Distinto|
@@ -144,10 +144,10 @@ El **o** es un operador binario que resulta en verdad si al menos uno de los val
 
 | Entrada   | Resultado |
 |:---------:|:---------:|
-| `F | F`   | `F`       |
-| `V | F`   | `V`       |
-| `F | V`   | `V`       |
-| `V | V`   | `V`       |
+| `F \| F`   | `F`       |
+| `V \| F`   | `V`       |
+| `F \| V`   | `V`       |
+| `V \| V`   | `V`       |
 
 #### Operador `&`
 El **y** es un operador binario que resulta en verdad solo si ambos valores son verdad.
