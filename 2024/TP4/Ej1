@@ -1,0 +1,106 @@
+programa ejemplo
+procesos
+  proceso depositarFlores(ES flores: numero; E avenida: numero; E calle: numero)
+  comenzar
+    Pos(avenida, calle+1)
+    repetir flores
+      depositarFlor
+  fin
+areas
+  aJ: AreaP(100,100,100,100)
+  a1: AreaP(1,1,1,1)
+  a2: AreaP(2,1,2,1)
+  a3: AreaP(3,1,3,1)
+  d1: AreaPC(1,2,1,2)
+  d2: AreaPC(2,2,2,2)
+  d3: AreaPC(3,2,3,2)
+  r1: AreaP(1,3,1,5)
+  r2: AreaP(2,3,2,5)
+  r3: AreaP(3,3,3,5)
+robots
+  robot cliente
+  variables
+    ID, aA, cA, flores: numero
+    seguir: boolean
+  comenzar
+    aA:= PosAv
+    cA:= PosCa
+    Random(flores, 1, 4)
+    RecibirMensaje(ID, jefe)
+    EnviarMensaje(ID, jefe)
+    EnviarMensaje(aA, jefe)
+    EnviarMensaje(cA, jefe)
+    EnviarMensaje(flores, jefe)
+    RecibirMensaje(seguir, jefe)
+    mover
+    repetir flores
+      tomarFlor
+    repetir flores-1 
+      depositarFlor
+      mover 
+    depositarFlor
+  fin
+  robot servidor
+  variables
+    ID, avenida, calle, flores, cA, aA: numero
+    seguir: boolean
+  comenzar
+    ID:= 0
+    avenida:= 0
+    calle:= 0
+    flores:= 0
+    cA:= PosCa
+    aA:= PosAv
+    seguir:= V
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+    EnviarMensaje(1, robot1)
+    EnviarMensaje(2, robot2)
+    EnviarMensaje(3, robot3)
+    repetir 3
+      RecibirMensaje(ID, *)
+      si (ID = 1)
+        RecibirMensaje(avenida, robot1)
+        RecibirMensaje(calle, robot1)
+        RecibirMensaje(flores, robot1)
+        depositarFlores(flores, avenida, calle)
+        Pos(aA, cA)
+        EnviarMensaje(seguir, robot1)
+      sino
+        si (ID =2)
+          RecibirMensaje(avenida, robot2)
+          RecibirMensaje(calle, robot2)
+          RecibirMensaje(flores, robot2)
+          depositarFlores(flores, avenida, calle)
+          Pos(aA, cA)
+          EnviarMensaje(seguir, robot2)
+        sino
+          RecibirMensaje(avenida, robot3)
+          RecibirMensaje(calle, robot3)
+          RecibirMensaje(flores, robot3)     
+          depositarFlores(flores, avenida, calle)
+          Pos(aA, cA)
+          EnviarMensaje(seguir, robot3)
+  fin
+variables 
+  jefe: servidor
+  robot1, robot2, robot3: cliente
+comenzar
+  AsignarArea(jefe, aJ)
+  AsignarArea(jefe, d1)
+  AsignarArea(jefe, d2)
+  AsignarArea(jefe, d3)
+  AsignarArea(robot1, a1)
+  AsignarArea(robot2, a2)
+  AsignarArea(robot3, a3)
+  AsignarArea(robot1, d1)
+  AsignarArea(robot2, d2)
+  AsignarArea(robot3, d3)
+  AsignarArea(robot1, r1)
+  AsignarArea(robot2, r2)
+  AsignarArea(robot3, r3)
+  Iniciar(jefe, 100,100) 
+  Iniciar(robot1, 1,1)
+  Iniciar(robot2, 2,1)
+  Iniciar(robot3, 3,1)
+fin

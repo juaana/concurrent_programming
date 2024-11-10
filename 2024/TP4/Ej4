@@ -1,0 +1,105 @@
+programa Ej4TP4
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores + 1
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      papeles:= papeles + 1
+  fin
+  proceso depositarContenido(E flores: numero; E papeles: numero)
+  comenzar
+    repetir flores
+      depositarFlor
+    repetir papeles
+      depositarPapel
+  fin
+  proceso recibirCoordenadas(ES avenida: numero; ES calle: numero)
+  comenzar
+    RecibirMensaje(avenida, jefe)
+    RecibirMensaje(calle, jefe)
+  fin
+areas
+  areaTrabajo: AreaPC (2,2,100,100)
+  a1: AreaP(2,1,2,1)
+  a2: AreaP(3,1,3,1)
+  aJ: AreaP(1,1,1,1)
+robots
+  robot trabajador
+  variables
+    tarea, flores, papeles, avenida, calle, aA, cA: numero
+    ok, listo: boolean
+  comenzar
+    ok:= F
+    listo:= V
+    aA:= PosAv
+    cA:= PosCa
+    mientras (ok=F)
+      RecibirMensaje(tarea, jefe)
+      si (tarea = 1)
+        recibirCoordenadas(avenida,calle)
+        Pos(avenida, calle)
+        juntarFlores(flores)
+        Pos(aA, cA)
+        EnviarMensaje(listo, jefe)
+      sino
+        si (tarea =2)
+          recibirCoordenadas(avenida,calle)
+          Pos(avenida, calle)
+          juntarPapeles(papeles)
+          Pos(aA, cA)
+          EnviarMensaje(listo, jefe)
+        sino
+          si(tarea = 3)
+            recibirCoordenadas(avenida,calle)
+            Pos(avenida, calle)
+            depositarContenido(flores, papeles)
+            EnviarMensaje(listo, jefe)
+            Pos(aA, cA)
+            flores:= 0
+            papeles:= 0
+          sino
+            ok:= V
+  fin
+  robot jefe
+  variables
+    tarea, calle, avenida, robotA: numero
+    listo: boolean
+  comenzar
+    repetir 10
+      Random(robotA,1,2)
+      Random(tarea,1,3)
+      Random(avenida,2,100)
+      Random(calle, 2, 100)
+      si (robotA = 1)
+        EnviarMensaje(tarea, robot1)
+        EnviarMensaje(avenida, robot1)
+        EnviarMensaje(calle,robot1)
+        RecibirMensaje(listo, robot1)
+      sino
+        EnviarMensaje(tarea, robot2)
+        EnviarMensaje(avenida, robot2)
+        EnviarMensaje(calle,robot2)
+        RecibirMensaje(listo, robot2)
+    EnviarMensaje(4, robot1)
+    EnviarMensaje(4, robot2)      
+  fin
+variables
+  robot1, robot2: trabajador
+  jefe: jefe
+comenzar
+  AsignarArea(robot1, a1)
+  AsignarArea(robot2, a2)
+  AsignarArea(jefe, aJ)
+  AsignarArea(robot1, areaTrabajo)
+  AsignarArea(robot2, areaTrabajo)
+  AsignarArea(jefe, areaTrabajo)
+  Iniciar(robot1, 2,1)
+  Iniciar(robot2, 3,1)
+  Iniciar(jefe, 1,1)
+fin

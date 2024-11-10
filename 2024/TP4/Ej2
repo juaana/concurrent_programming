@@ -1,0 +1,85 @@
+programa ejemplo
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot productor
+  variables
+    papelesParciales, papeles, aA, cA: numero
+  comenzar
+    papelesParciales:= 0
+    aA:= PosAv
+    cA:= PosCa
+    mientras PosCa < 50
+      mientras HayPapelEnLaEsquina
+        si papelesParciales < 5 
+          tomarPapel 
+          papeles:= papeles +1     
+          papelesParciales:= papelesParciales + 1 
+        sino 
+          BloquearEsquina(50,50) 
+          Pos(50,50) 
+          repetir papelesParciales
+            depositarPapel
+          Pos(aA, cA)
+          LiberarEsquina(50,50)
+          papelesParciales:= 0 
+      mover
+      aA:= PosAv
+      cA:= PosCa
+    mientras HayPapelEnLaEsquina 
+      si papelesParciales < 5 
+        tomarPapel 
+        papeles:= papeles +1     
+        papelesParciales:= papelesParciales + 1 
+      sino 
+        BloquearEsquina(50,50) 
+        Pos(50,50) 
+        repetir papelesParciales
+          depositarPapel
+        Pos(aA, cA)
+        LiberarEsquina(50,50)
+        papelesParciales:= 0 
+  fin
+  robot consumidor
+  variables
+    ran, aA, cA, veces, papeles: numero
+  comenzar
+    aA:= PosAv
+    cA:= PosCa
+    veces:= 0
+    papeles:= 0
+    mientras (veces < 8)
+      Random(ran, 2, 5)
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      repetir ran
+        si HayPapelEnLaEsquina
+          tomarPapel
+          papeles:= papeles +1
+          si papeles = ran
+            veces:= veces -1
+        sino 
+          repetir papeles
+            si HayPapelEnLaBolsa
+              depositarPapel
+          veces:= veces + 1
+          papeles:= 0
+      Pos(aA,cA)
+      LiberarEsquina(50,50)  
+      repetir papeles
+        si HayPapelEnLaBolsa
+          depositarPapel
+  fin
+variables
+  productor1, productor2: productor
+  consumidor1, consumidor2: consumidor
+comenzar 
+  AsignarArea(consumidor1, ciudad)
+  AsignarArea(consumidor2, ciudad)
+  AsignarArea(productor1, ciudad)
+  AsignarArea(productor2, ciudad)
+  Iniciar(productor1, 5,1) 
+  Iniciar(productor2, 10,1)
+  Iniciar(consumidor1, 11,1)
+  Iniciar(consumidor2, 12,1)
+fin

@@ -1,0 +1,116 @@
+programa ejemplo
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores +1
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      papeles:= papeles +1
+  fin
+areas
+  a1: AreaP (5,1,5,10)
+  a2: AreaP (6,1,6,10)
+  a3: AreaP (7,1,7,10)
+  aJ: AreaP (1,1,1,1)
+robots
+  robot juntador
+  variables
+    ID, flores, papeles: numero
+    ok: boolean
+  comenzar
+    ok:= F
+    RecibirMensaje(ID, jefe)
+    repetir 9
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores)
+    EnviarMensaje(ID, jefe)
+    EnviarMensaje(flores, jefe)
+    RecibirMensaje(ok, jefe)
+    si (ok = V)
+      Pos(PosAv, 1)
+      repetir 9
+        juntarPapeles(papeles)
+        mover
+      juntarPapeles(papeles)
+      EnviarMensaje(ID, jefe)     
+  fin
+  robot jefe
+  variables
+    ID, IdMax, IdMed, IdMin, flores,floresMax,floresMed, ganador: numero
+  comenzar
+    ID:= 0
+    IdMax:= 0
+    IdMed:= 0
+    floresMax:= -1
+    floresMed:= -1
+    EnviarMensaje(1, recolector1)
+    EnviarMensaje(2, recolector2)
+    EnviarMensaje(3, recolector3)
+    repetir 3
+      RecibirMensaje(ID, *)
+      si (ID =1) 
+        RecibirMensaje(flores, recolector1)
+      sino
+        si (ID = 2)
+          RecibirMensaje(flores, recolector2)
+        sino
+          RecibirMensaje(flores, recolector3)
+      si (flores > floresMax)
+        floresMed:= floresMax
+        floresMax:= flores
+        IdMed:= IdMax
+        IdMax:= ID
+      sino 
+        si (flores > floresMed)
+          floresMed:= flores
+          IdMin:= IdMed
+          IdMed:= ID
+        sino 
+          IdMin:= ID
+    si (IdMax = 1)
+      EnviarMensaje(V, recolector1)
+    sino
+      si (IdMax = 2)
+        EnviarMensaje(V, recolector2)
+      sino
+        si (IdMax = 3)
+          EnviarMensaje(V, recolector3)
+    si (IdMed = 1)
+      EnviarMensaje(V, recolector1)
+    sino
+      si (IdMed = 2)
+        EnviarMensaje(V, recolector2)
+      sino
+        si (IdMed = 3)
+          EnviarMensaje(V, recolector3)      
+    si (IdMin= 1)
+      EnviarMensaje(F, recolector1)
+    sino
+      si (IdMin =2)
+        EnviarMensaje(F ,recolector2)
+      sino
+        si (IdMin =3)
+          EnviarMensaje(F, recolector3)
+    RecibirMensaje(ganador, *)
+    RecibirMensaje(ID,*)
+    Informar(ganador)
+  fin
+variables 
+  recolector1, recolector2, recolector3: juntador
+  jefe: jefe
+comenzar
+  AsignarArea(recolector1, a1)
+  AsignarArea(recolector2, a2)
+  AsignarArea(recolector3, a3)
+  AsignarArea(jefe, aJ)
+  Iniciar(recolector1, 5,1)
+  Iniciar(recolector2, 6,1)
+  Iniciar(recolector3, 7,1)
+  Iniciar(jefe, 1,1)
+fin
