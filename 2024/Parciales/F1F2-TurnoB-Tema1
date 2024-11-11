@@ -1,0 +1,112 @@
+programa ejemplo 
+procesos 
+  proceso juntarFlores(ES flores: numero) 
+  comenzar 
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores + 1
+  fin 
+  proceso recorrerJuntandoFloresF1(ES flores: numero; E caB: numero; E ID: numero)
+  comenzar
+    repetir caB - 2
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores)
+    BloquearEsquina(6, caB)
+    mover
+    EnviarMensaje(ID, fiscalizador)
+    juntarFlores(flores)
+    mover
+    LiberarEsquina(6, caB)
+    repetir 60 - caB -1
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores)
+    EnviarMensaje(ID, fiscalizador)
+    EnviarMensaje(flores, fiscalizador)   
+  fin
+  proceso recorrerJuntandoFloresF2(ES flores: numero; E caB: numero; E ID: numero)
+  comenzar
+    repetir 4
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores)
+    BloquearEsquina(6, caB)
+    mover
+    EnviarMensaje(ID, fiscalizador)
+    juntarFlores(flores)
+    mover
+    LiberarEsquina(6, caB)
+    repetir 53
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores)
+    EnviarMensaje(ID, fiscalizador)
+    EnviarMensaje(flores, fiscalizador)   
+  fin
+areas 
+  ciudad: AreaPC (2,2,60,60)
+  aF: AreaP(100,100,100,100)
+  a1: AreaP(6,1,6,1)
+  a2: AreaP(1,2,1,50)
+robots
+  robot F1
+  variables
+    ID, flores, caB: numero
+  comenzar
+    ID:= 0
+    flores:= 0
+    caB:= 0
+    RecibirMensaje(ID, fiscalizador)
+    RecibirMensaje(caB,fiscalizador)
+    recorrerJuntandoFloresF1(flores,caB,ID)
+  fin
+  robot F2
+  variables
+    ID, flores, caB: numero 
+  comenzar 
+    ID:= 0 
+    flores:= 0 
+    caB:= 0 
+    RecibirMensaje(ID, fiscalizador)  
+    RecibirMensaje(caB,fiscalizador) 
+    Pos(PosAv, caB)
+    derecha
+    recorrerJuntandoFloresF2(flores,caB,ID) 
+  fin 
+  robot fiscalizador
+  variables
+    ID, ganador,flores, floresG, caB: numero
+  comenzar
+    Random(caB,2,50)
+    EnviarMensaje(1, F1)  
+    EnviarMensaje(2, F2)  
+    EnviarMensaje(caB,F1) 
+    EnviarMensaje(caB, F2)
+    RecibirMensaje(ganador, *)
+    RecibirMensaje(ID,*)
+    repetir 2
+      RecibirMensaje(ID,*)
+      si ID = 1
+        RecibirMensaje(flores, F1)
+      sino
+        RecibirMensaje(flores, F2)
+      si ID = ganador
+        floresG:= flores
+    Informar("El ganador fue", ganador)
+    Informar("Junto la siguiente cantidad de flores ", floresG)
+  fin 
+variables  
+  F1: F1
+  F2: F2
+  fiscalizador: fiscalizador
+comenzar
+  AsignarArea(F1, ciudad)
+  AsignarArea(F2, ciudad)
+  AsignarArea(fiscalizador, aF)
+  AsignarArea(F1, a1)
+  AsignarArea(F2, a2)
+  Iniciar(F1, 6,1)
+  Iniciar(F2, 1,2)
+  Iniciar(fiscalizador,100,100)
+fin

@@ -1,0 +1,101 @@
+{Tres robots deben realizar 5 cuadrados cada uno, como se ejemplifica en la figura, juntando todas las flores que encuentran a su paso. El tamaño de cada cuadrado será determinado aleatoriamente entre 1 y 5 por cada robot. Al finalizar cada cuadrado, deberán esperar que los otros robots también finalicen para avanzar hacia el siguiente cuadrado, siguiendo el modelo de sincronización barrera sin coordinador. Una vez completados los 5 cuadrados, deberán depositar de a una todas las flores encontradas en la esquina (50,50). Los robots inician en las esquinas (1,1) y (8,1), y (15,1). Existe un robot coordinador, que inicia en (51,1), cuya única tarea es asignar identificadores a cada robot.}
+
+programa ejemplo 
+procesos 
+  proceso juntarFlores(ES flores: numero) 
+  comenzar 
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores+1
+  fin 
+  proceso cuadradoJuntandoFlores(ES flores: numero ; E lado: numero)
+  comenzar
+    repetir 4
+      repetir lado
+        juntarFlores(flores)
+        mover
+      derecha
+  fin
+  proceso depositarFlores(E flores: numero)
+  variables
+    aA,cA: numero
+  comenzar
+    aA:= PosAv
+    cA:= PosCa
+    repetir flores
+      BloquearEsquina(50,50) 
+      Pos(50,50) 
+      depositarFlor 
+      Pos(aA, cA) 
+      LiberarEsquina(50,50) 
+  fin
+  proceso barrera(E ID: numero)
+  variables
+    ok: boolean
+  comenzar
+    ok:= V
+    si (ID = 1)
+      EnviarMensaje(ok, robot2)
+      EnviarMensaje(ok,robot3)
+      repetir 2
+        RecibirMensaje(ok, *)
+    sino
+      si (ID = 2)
+        EnviarMensaje(ok, robot1)
+        EnviarMensaje(ok, robot3)
+        repetir 2
+          RecibirMensaje(ok, *)
+      sino
+        EnviarMensaje(ok, robot1)
+        EnviarMensaje(ok, robot2)
+        repetir 2
+          RecibirMensaje(ok, *)       
+  fin
+areas
+  deposito: AreaPC (50,50,50,50)
+  aCor: AreaP(51,1,51,1)
+  a1: AreaP(1,1,6,31)
+  a2: AreaP(8,1,13,31)
+  a3: AreaP(15,1, 20, 31)
+robots 
+  robot juntador
+  variables
+    ID, flores, lado, aA, cA: numero
+    ok: boolean
+  comenzar
+    aA:= 0
+    cA:= 0
+    ID:= 0
+    flores:= 0
+    lado:= 0
+    ok:= V
+    RecibirMensaje(ID, coordinador)
+    repetir 5 
+      Random(lado,1,5)
+      cuadradoJuntandoFlores(flores, lado)
+      Pos(PosAv, PosCa+lado+1)
+      barrera(ID)
+    depositarFlores(flores)
+  fin
+  robot coordinador
+  comenzar
+    EnviarMensaje(1, robot1)
+    EnviarMensaje(2, robot2)
+    EnviarMensaje(3, robot3)
+  fin
+variables
+  robot1,robot2, robot3: juntador
+  coordinador: coordinador
+comenzar
+  AsignarArea(robot1, a1)
+  AsignarArea(robot2, a2)
+  AsignarArea(robot3, a3)
+  AsignarArea(robot1, deposito)
+  AsignarArea(robot2, deposito)
+  AsignarArea(robot3, deposito)
+  AsignarArea(coordinador, aCor)
+  Iniciar(robot1, 1,1)
+  Iniciar(robot2, 8,1)
+  Iniciar(robot3, 15,1)
+  Iniciar(coordinador, 51,1)
+fin

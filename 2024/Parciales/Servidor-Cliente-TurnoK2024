@@ -1,0 +1,98 @@
+programa ejemplo
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores + 1
+  fin
+  proceso cuadradoJuntandoFlores(ES flores: numero; ES lado: numero)
+  comenzar
+    repetir 4
+      repetir lado
+        juntarFlores(flores)
+        mover
+      derecha
+  fin
+  proceso depositarFlores(E flores: numero)
+  variables
+    aA, cA: numero
+  comenzar
+    aA:= PosAv
+    cA:= PosCa 
+    repetir flores
+      BloquearEsquina(50,50) 
+      Pos(50,50) 
+      depositarFlor 
+      Pos(aA, cA)
+      LiberarEsquina(50,50)
+  fin 
+areas
+  deposito: AreaC (50,50,50,50)
+  a1: AreaP(1,1,6,19)
+  a2: AreaP(8,1,13,19)
+  a3: AreaP(15,1,20,19)
+  aS: AreaP(22,1,22,1)
+robots
+  robot cliente
+  variables
+    ID, lado,flores: numero
+  comenzar
+    ID:= 0
+    lado:= 0
+    flores:= 0
+    RecibirMensaje(ID, servidor)
+    repetir 3
+      EnviarMensaje(ID, servidor)
+      RecibirMensaje(lado, servidor)
+      cuadradoJuntandoFlores(flores,lado)
+      Pos(PosAv, PosCa+lado+1)
+    depositarFlores(flores)     
+    EnviarMensaje(flores, servidor)    
+  fin
+  robot servidor
+  variables
+    lado, flores, floresTotales, ID: numero
+  comenzar
+    lado:= 0
+    flores:= 0
+    floresTotales:= 0
+    ID:= 0
+    EnviarMensaje(1, cliente1)
+    EnviarMensaje(2, cliente2)
+    EnviarMensaje(3, cliente3)
+    repetir 9
+      RecibirMensaje(ID, *)
+      Random(lado,1,5)
+      si ID = 1
+        EnviarMensaje(lado, cliente1)
+      sino
+        si (ID=2)
+          EnviarMensaje(lado, cliente2)
+        sino
+          EnviarMensaje(lado, cliente3)
+    repetir 3
+      RecibirMensaje(flores, *)
+      floresTotales:= floresTotales + flores
+    Pos(50,50)
+    repetir flores
+      tomarFlor
+    Informar("Flores recogidas", floresTotales)
+  fin
+variables
+  cliente1, cliente2, cliente3: cliente
+  servidor: servidor
+comenzar
+  AsignarArea(cliente1, deposito)
+  AsignarArea(cliente2, deposito)
+  AsignarArea(cliente3, deposito)
+  AsignarArea(servidor, deposito)
+  AsignarArea(cliente1, a1)
+  AsignarArea(cliente2, a2)
+  AsignarArea(cliente3, a3)
+  AsignarArea(servidor, aS)
+  Iniciar(cliente1, 1,1)
+  Iniciar(cliente2, 8,1)
+  Iniciar(cliente3, 15,1)
+  Iniciar(servidor, 22, 1)
+fin
