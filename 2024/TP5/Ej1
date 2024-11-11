@@ -1,0 +1,151 @@
+programa Ej1TP5
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores+1
+  fin
+  proceso juntarPapeles(ES papeles: numero)
+  comenzar
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+      papeles:= papeles + 1    
+  fin
+  proceso recorrerJuntandoFlores(ES flores: numero)
+  comenzar
+    repetir 96
+      juntarFlores(flores)
+      mover
+    juntarFlores(flores) 
+    BloquearEsquina(PosAv, PosCa+1) 
+    mover
+    juntarFlores(flores)
+    BloquearEsquina(PosAv, PosCa+1) 
+    mover
+    LiberarEsquina(PosAv, PosCa-1)
+    juntarFlores(flores)
+    mover
+    LiberarEsquina(PosAv, PosCa-1)
+    juntarFlores(flores)
+  fin
+  proceso recorrerJuntandoPapeles(ES papeles: numero)
+  comenzar
+    juntarPapeles(papeles)
+    BloquearEsquina(PosAv+1, PosCa)
+    mover
+    juntarPapeles(papeles)
+    BloquearEsquina(PosAv+1,PosCa)
+    mover   
+    LiberarEsquina(PosAv-1, PosCa)
+    juntarPapeles(papeles)
+    mover
+    LiberarEsquina(PosAv-1, PosCa)
+    repetir 96
+      juntarPapeles(papeles)
+      mover
+    juntarPapeles(papeles)
+  fin
+areas
+  e1: AreaPC(2,98,2,98)
+  e2: AreaPC(2,99,2,99)
+  e3: AreaPC(3,98,3,98)
+  e4: AreaPC(3,99,3,99)
+  a11:AreaP(2,1,2,97)
+  a12:AreaP(2,100,2,100)
+  a21:AreaP(3,1,3,97)
+  a22:AreaP(3,100,3,100)
+  a31:AreaP(1,98,1,98)
+  a32:AreaP(4,98,100,98)
+  a41:AreaP(1,99,1,99)
+  a42:AreaP(4,99,100,99)
+  aJ:AreaP(100,100,100,100)
+robots
+  robot equipo1
+  variables
+    ID, flores: numero
+  comenzar
+    ID:= 0
+    flores:= 0
+    RecibirMensaje(ID, fiscalizador)
+    recorrerJuntandoFlores(flores)
+    EnviarMensaje(ID, fiscalizador)
+    EnviarMensaje(flores, fiscalizador)
+  fin 
+  robot equipo2
+  variables
+    ID, papeles: numero
+  comenzar 
+    ID:= 0 
+    papeles:= 0 
+    derecha
+    RecibirMensaje(ID, fiscalizador)  
+    recorrerJuntandoPapeles(papeles)  
+    EnviarMensaje(ID, fiscalizador) 
+    EnviarMensaje(papeles, fiscalizador) 
+  fin  
+  robot fiscalizador
+  variables
+    papeles, flores, ID, papelesTotales, floresTotales: numero
+  comenzar
+    papeles:= 0
+    flores:= 0
+    ID:= 0
+    papelesTotales:= 0
+    floresTotales:= 0
+    EnviarMensaje(1, R1)
+    EnviarMensaje(2, R2)
+    EnviarMensaje(3, R3)
+    EnviarMensaje(4, R4)
+    repetir 4
+      RecibirMensaje(ID, *) 
+      si (ID = 1)
+        RecibirMensaje(flores, R1)
+        floresTotales:= floresTotales + flores
+      sino
+        si (ID = 2)
+          RecibirMensaje(flores, R2)
+          floresTotales:= floresTotales + flores
+        sino
+          si (ID=3)
+            RecibirMensaje(papeles, R3)
+            papelesTotales:= papelesTotales + papeles
+          sino
+            RecibirMensaje( papeles, R4)
+            papelesTotales:= papelesTotales + papeles
+    si papelesTotales > floresTotales
+      Informar("El equipo que junto mas objetos fue el equipo" , 2)
+    sino
+      si floresTotales > papelesTotales
+        Informar("El equipo que junto mas objetos fue el equipo" , 1)
+      sino
+        Informar("Ambos equipos empataron", floresTotales)
+  fin 
+variables 
+  R1, R2: equipo1
+  R3, R4: equipo2
+  fiscalizador: fiscalizador
+comenzar
+  AsignarArea(R1, a11)
+  AsignarArea(R1, a12)
+  AsignarArea(R2, a21)
+  AsignarArea(R2, a22)
+  AsignarArea(R3, a31)
+  AsignarArea(R3, a32)
+  AsignarArea(R4, a41)
+  AsignarArea(R4, a42)
+  AsignarArea(R1, e1)
+  AsignarArea(R1, e2)
+  AsignarArea(R2, e3)
+  AsignarArea(R2, e4)
+  AsignarArea(R3, e1)
+  AsignarArea(R3, e3)
+  AsignarArea(R4, e2)
+  AsignarArea(R4, e4)
+  AsignarArea(fiscalizador,aJ)
+  Iniciar(R1, 2,1)
+  Iniciar(R2, 3, 1)
+  Iniciar(R3, 1, 98)
+  Iniciar(R4, 1, 99)
+  Iniciar(fiscalizador, 100,100)
+fin

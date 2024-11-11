@@ -1,0 +1,107 @@
+{Tres robots floreros tienen 8 intentos en total para juntar todas las flores dentro del
+cuadrante comprendido entre las esquinas (40,40) y (60,60). Para ello, en cada intento un
+robot fiscalizador indicará a un robot aleatorio la esquina a la que debe dirigirse. El
+fiscalizador calculará esta esquina de manera aleatoria. Al completarse los 8 intentos, los
+robots floreros deberán depositar todas las flores juntadas en la esquina (10,10), y el robot
+fiscalizador deberá informar la cantidad total de flores juntadas por los robots.
+Los robots floreros inician en las esquinas (1,1), (2,1) y (3,1) respectivamente, y el
+fiscalizador en la (4,1).}
+
+programa ejemplo
+procesos
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores +1
+  fin
+areas
+  cuadrado: AreaPC (40,40,60,60)
+  deposito: AreaPC(10,10,10,10)
+  a1: AreaP(1,1,1,1)
+  a2: AreaP(2,1,2,1)
+  a3:AreaP(3,1,3,1)
+  aF:AreaP(4,1,4,1)
+robots
+  robot fiscalizador
+  variables
+    r,a,c, floresTotales, flores: numero
+  comenzar
+    r:= 0
+    a:= 0
+    c:= 0
+    floresTotales:= 0
+    flores:=0
+    repetir 8
+      Random(r,1,3)
+      Random(a,40, 60)
+      Random(c, 40, 60)
+      si (r = 1)
+        EnviarMensaje(F, robot1)
+        EnviarMensaje(a, robot1)
+        EnviarMensaje(c, robot1)
+      sino
+        si (r=2)
+          EnviarMensaje(F, robot2)
+          EnviarMensaje(a,robot2)
+          EnviarMensaje(c, robot2)
+        sino
+          EnviarMensaje(F, robot3)
+          EnviarMensaje(a,robot3)
+          EnviarMensaje(c, robot3)
+    EnviarMensaje(V, robot1)
+    EnviarMensaje(V, robot2)
+    EnviarMensaje(V, robot3)
+    repetir 3
+      RecibirMensaje(flores, *)
+      floresTotales:= floresTotales + flores
+    Informar("La cantidad de flores recolectadas fue ", floresTotales)
+  fin
+  robot florero
+  variables
+    flores, aA,cA,a,c: numero
+    ok: boolean
+  comenzar
+    flores:= 0
+    ok:= F
+    aA:= PosAv
+    cA:= PosCa
+    a:=0
+    c:= 0
+    RecibirMensaje(ok, fiscalizador)
+    mientras (ok = F)
+      RecibirMensaje(a, fiscalizador)
+      RecibirMensaje(c, fiscalizador)
+      BloquearEsquina(a,c)
+      Pos(a,c)
+      juntarFlores(flores)
+      Pos(aA,cA)
+      LiberarEsquina(a,c)
+      RecibirMensaje(ok, fiscalizador)
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    repetir flores
+      depositarFlor
+    Pos(aA,cA)
+    LiberarEsquina(10,10)
+    EnviarMensaje(flores, fiscalizador)     
+  fin
+variables
+  robot1, robot2, robot3: florero
+  fiscalizador: fiscalizador
+comenzar
+  AsignarArea(robot1, a1)
+  AsignarArea(robot2, a2)
+  AsignarArea(robot3, a3)
+  AsignarArea(fiscalizador, aF)
+  AsignarArea(robot1, cuadrado)
+  AsignarArea(robot2, cuadrado)
+  AsignarArea(robot3, cuadrado)
+  AsignarArea(robot1, deposito)
+  AsignarArea(robot2, deposito)
+  AsignarArea(robot3, deposito)
+  Iniciar(robot1, 1,1)
+  Iniciar(robot2, 2,1)
+  Iniciar(robot3, 3,1)
+  Iniciar(fiscalizador, 4,1)
+fin

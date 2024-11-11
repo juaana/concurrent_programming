@@ -1,0 +1,95 @@
+programa Ej5TP5
+procesos
+  proceso juntarPapelesDeAUno(E papeles: numero; E aA: numero; E cA: numero)
+  comenzar
+    repetir papeles
+      BloquearEsquina(100,1)
+      Pos(100,1)
+      tomarPapel
+      Pos(aA, cA)
+      LiberarEsquina(100,1)
+      depositarPapel
+  fin
+  proceso depositarPapeles(E papeles: numero)
+  comenzar
+    repetir papeles
+      depositarPapel
+  fin
+areas
+  deposito: AreaC(100,1,100,1)
+  a1: AreaP(10,1,10,1)
+  a2: AreaP(11,1,11,1)
+  a3: AreaP(12,1,12,1)
+  aS: AreaP(13,1,13,1)
+robots
+  robot servidor
+  variables
+    aA,cA,p, ID: numero 
+  comenzar
+    aA:= PosAv
+    cA:= PosCa
+    mientras HayPapelEnLaEsquina
+      tomarPapel
+    EnviarMensaje(1, cliente1)
+    EnviarMensaje(2, cliente2)
+    EnviarMensaje(3, cliente3)
+    RecibirMensaje(ID, *)
+    repetir 11
+      Random(p, 1,5)
+      BloquearEsquina(100,1)
+      Pos(100,1)
+      depositarPapeles(p)
+      Pos(aA, cA)
+      LiberarEsquina(100,1)
+      si (ID = 1)
+        EnviarMensaje(p, cliente1)
+      sino 
+        si (ID = 2)
+          EnviarMensaje(p, cliente2)
+        sino
+          EnviarMensaje(p, cliente3)
+      RecibirMensaje(ID, *)
+    Random(p, 1,5)
+    BloquearEsquina(100,1)
+    Pos(100,1)
+    depositarPapeles(p)
+    Pos(aA, cA)
+    LiberarEsquina(100,1)
+    si (ID = 1)
+      EnviarMensaje(p, cliente1)
+    sino 
+      si (ID = 2)
+        EnviarMensaje(p, cliente2)
+      sino
+        EnviarMensaje(p, cliente3)
+  fin
+  robot cliente
+  variables
+    p,aA,cA, ID: numero 
+  comenzar
+    p:= 0
+    aA:= PosAv
+    cA:= PosCa
+    RecibirMensaje(ID, servidor)
+    repetir 4
+      EnviarMensaje(ID,servidor)
+      RecibirMensaje(p, servidor)
+      juntarPapelesDeAUno(p, aA, cA)    
+  fin
+variables
+  cliente1, cliente2, cliente3: cliente
+  servidor: servidor
+comenzar
+  AsignarArea(servidor, deposito)
+  AsignarArea(cliente1, deposito)
+  AsignarArea(cliente2, deposito)
+  AsignarArea(cliente3, deposito)
+  AsignarArea(servidor, aS)
+  AsignarArea(cliente1, a1)
+  AsignarArea(cliente2, a2)
+  AsignarArea(cliente3, a3)
+  Iniciar(cliente1, 10,1)
+  Iniciar(cliente2, 11,1)
+  Iniciar(cliente3, 12,1)
+  Iniciar(servidor, 13,1)
+fin

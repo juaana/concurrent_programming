@@ -1,0 +1,85 @@
+programa Ej3TP5
+procesos
+  proceso juntarFlor(ES flores: numero)
+  comenzar
+    si HayFlorEnLaEsquina
+      tomarFlor
+      flores:= flores + 1
+  fin
+areas
+  a1: AreaP (1,3,100,3)
+  a2: AreaP (1,4,100,4)
+  aJ: AreaP(1,5,1,5)
+  deposito: AreaC(10,10,10,10)
+robots
+  robot recolector
+  variables
+    cantCalles, flores, aA, cA, contadorFlores: numero
+    ok: boolean
+  comenzar  
+    ok:= F
+    flores:= 0
+    contadorFlores:= 0
+    derecha
+    mientras PosAv < 100
+      si cantCalles = 10
+        cantCalles:= 0
+      si contadorFlores = 15
+        contadorFlores:= 0
+      flores:= 0
+      juntarFlor(flores)
+      mientras (cantCalles < 10) & (contadorFlores < 15)& (PosAv<100)
+        mover
+        juntarFlor(flores)
+        contadorFlores:= contadorFlores + 1   
+        cantCalles:= cantCalles +1
+      aA:= PosAv
+      cA:= PosCa
+      BloquearEsquina(10,10)
+      Pos(10,10)
+      repetir flores
+        depositarFlor
+      Pos(aA, cA)
+      LiberarEsquina(10,10)
+      si (PosAv = 100)
+        ok:= V
+      EnviarMensaje( ok,cosechador)
+      EnviarMensaje(flores, cosechador)    
+  fin
+  robot cosechador
+  variables
+    ok: boolean
+    flores,floresTotales, aA, cA: numero
+  comenzar
+    aA:= PosAv
+    cA:= PosCa
+    flores:= 0
+    floresTotales:= 0
+    RecibirMensaje(ok, *)
+    RecibirMensaje(flores,*)
+    mientras ok = F
+      floresTotales:= floresTotales + flores
+      BloquearEsquina(10,10)
+      Pos(10,10)
+      repetir flores
+        tomarFlor
+      Pos(aA, cA)
+      LiberarEsquina(10,10)
+      RecibirMensaje(ok, *)
+      RecibirMensaje(flores,*)
+    Informar("La cantidad de flores juntadas fue ", floresTotales)     
+  fin
+variables 
+  c1, c2: recolector
+  cosechador: cosechador
+comenzar
+  AsignarArea(c1, a1)
+  AsignarArea(c2, a2)
+  AsignarArea(cosechador, aJ)
+  AsignarArea(c1, deposito)
+  AsignarArea(c2, deposito)
+  AsignarArea(cosechador, deposito)
+  Iniciar(c1,1,3) 
+  Iniciar(c2, 1, 4)
+  Iniciar(cosechador, 1, 5)
+fin 
