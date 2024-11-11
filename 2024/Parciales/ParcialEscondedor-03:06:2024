@@ -1,0 +1,88 @@
+programa ejemplo
+areas
+  ciudad: AreaC (10,10,13,13)
+  a1: AreaP(1,1,1,1)
+  a2: AreaP(2,2,2,2)
+  a3: AreaP(3,3,3,3)
+  aE: AreaP(4,4,4,4)
+robots
+  robot escondedor 
+  variables
+    avEscondite, caEscondite,avA, caA, ganador, ID: numero
+    ok: boolean
+  comenzar 
+    caA:= PosCa
+    avA:= PosAv
+    ID:= 0
+    ok:=F
+    tomarFlor
+    Random(avEscondite, 10,13)
+    Random(caEscondite,10,13)
+    Pos(avEscondite,caEscondite)
+    depositarFlor
+    Pos(avA,caA)
+    EnviarMensaje(1, buscador1)
+    EnviarMensaje(2, buscador2) 
+    EnviarMensaje(3, buscador3) 
+    mientras ok = F
+      RecibirMensaje(ID,*)
+      si (ID = 1)
+        RecibirMensaje(ok, buscador1)
+      sino
+        si(ID =2)
+          RecibirMensaje(ok, buscador2)
+        sino
+          RecibirMensaje(ok, buscador3)
+      si (ok = V)
+        ganador:= ID 
+      si (ID=1)
+        EnviarMensaje(ok, buscador2)
+        EnviarMensaje(ok,buscador3)
+      sino
+        si(ganador=2)
+          EnviarMensaje(ok, buscador1)
+          EnviarMensaje(ok, buscador3)
+        sino
+          EnviarMensaje(ok, buscador1)
+          EnviarMensaje(ok, buscador2)            
+    Informar("El ganador es ", ganador)
+  fin
+  robot buscador
+  variables
+    avA,caA, avRandom, caRandom, ID: numero
+    ok, final: boolean
+  comenzar
+    avA:= PosAv
+    caA:= PosCa
+    ok:= F
+    RecibirMensaje(ID, escondedor)
+    mientras (ok=F) & (final =F)
+      Random(avRandom,10,13)
+      Random(caRandom,10,13)
+      BloquearEsquina(avRandom, caRandom)
+      Pos(avRandom, caRandom)  
+      si HayFlorEnLaEsquina
+        ok:= V
+      Pos(avA, caA)
+      LiberarEsquina(avRandom, caRandom)
+      EnviarMensaje(ID, escondedor) 
+      EnviarMensaje(ok, escondedor)
+      RecibirMensaje(final, escondedor)    
+  fin
+variables
+  buscador1, buscador2, buscador3: buscador
+  escondedor: escondedor
+comenzar
+  AsignarArea(escondedor, ciudad)
+  AsignarArea(buscador1, ciudad)
+  AsignarArea(buscador2, ciudad)
+  AsignarArea(buscador3, ciudad)
+  AsignarArea(escondedor, aE)
+  AsignarArea(buscador1, a1)
+  AsignarArea(buscador2, a2)
+  AsignarArea(buscador3, a3)
+  Iniciar(buscador1, 1,1)
+  Iniciar(buscador2, 2,2)
+  Iniciar(buscador3, 3,3)
+  Iniciar(escondedor, 4,4)
+fin

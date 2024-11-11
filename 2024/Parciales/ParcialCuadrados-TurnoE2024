@@ -1,0 +1,96 @@
+{Tres robots deben realizar 3 cuadrados cada uno, como se ejemplifica en la figura, juntando todas las flores que encuentran a su paso. El tamaño de cada cuadrado será determinado aleatoriamente entre 1 y 4 por cada robot. Al finalizar cada cuadrado, deberán depositar de a una todas las flores encontradas en la esquina (50,50). Cuando los robots terminan los 3 cuadrados, un robot coordinador deberá informar qué robot recorrió más esquinas.
+Los robots inician en las esquinas (1,1), (7,1) y (14,1) y el robot coordinador en la esquina
+(51,51)}
+
+programa ExamenCuadrados
+procesos 
+  proceso juntarFlores(ES flores: numero)
+  comenzar
+    mientras HayFlorEnLaEsquina
+      tomarFlor
+      flores:=flores+1
+  fin
+  proceso cuadradoJuntandoFlores(E lado: numero; ES esquinas: numero; ES flores: numero ) 
+  comenzar 
+    repetir 4
+      repetir lado
+        juntarFlores(flores)
+        mover
+        esquinas:= esquinas + 1
+      derecha
+  fin
+  proceso depositarFlores(E aA: numero; E cA: numero ; ES flores: numero)
+  comenzar
+    repetir flores
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      depositarFlor
+      Pos(aA,cA)
+      LiberarEsquina(50,50)
+  fin
+areas
+  deposito: AreaPC (50,50,50,50)
+  a1: AreaP(1,1,5,16) 
+  a2: AreaP(7,1,11,16) 
+  a3: AreaP(14,1,18,16) 
+  aC: AreaP(51,51,51,51)
+robots
+  robot cuadrado
+  variables
+    lado,esquinas, flores, aA, cA, ID: numero
+  comenzar
+    esquinas:= 0
+    flores:= 0
+    aA:=0
+    cA:=0
+    RecibirMensaje(ID, coordinador)
+    repetir 3
+      Random(lado, 1, 4)
+      cuadradoJuntandoFlores(lado, esquinas,flores)
+      Pos(PosAv, PosCa+lado+1)
+      aA:= PosAv
+      cA:= PosCa
+      depositarFlores(aA,cA,flores)
+      flores:= 0
+    EnviarMensaje(ID, coordinador)
+    EnviarMensaje(esquinas, coordinador)
+  fin
+  robot coordinador
+  variables
+    ID, esquinas, maxEsquinas, ganador: numero
+  comenzar
+    ID:= 0
+    esquinas:= 0
+    EnviarMensaje(1, c1)
+    EnviarMensaje(2, c2)
+    EnviarMensaje(3, c3)
+    repetir 3
+      RecibirMensaje(ID, *)
+      si (ID = 1) 
+        RecibirMensaje(esquinas, c1) 
+      sino 
+        si (ID =2) 
+          RecibirMensaje(esquinas, c2) 
+        sino 
+          RecibirMensaje(esquinas, c3)         
+      si(esquinas> maxEsquinas) 
+        maxEsquinas:= esquinas
+        ganador:= ID
+    Informar("El r que mas esquinas recorrió fue ", ganador)
+  fin 
+variables 
+  c1, c2, c3: cuadrado 
+  coordinador: coordinador
+comenzar 
+  AsignarArea(c1, a1)
+  AsignarArea(c2, a2) 
+  AsignarArea(c3, a3)  
+  AsignarArea(c1, deposito)
+  AsignarArea(c2, deposito) 
+  AsignarArea(c3, deposito)  
+  AsignarArea(coordinador, aC) 
+  Iniciar(c1, 1,1) 
+  Iniciar(c2, 7,1) 
+  Iniciar(c3, 14,1) 
+  Iniciar(coordinador, 51,51) 
+fin
